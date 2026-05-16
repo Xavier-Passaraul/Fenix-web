@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+  <!-- ============================================================
+       FENIX SALÓN UNISEX — index.html
+       Landing page principal
+       ============================================================ -->
+
+  <!-- Codificación y viewport responsivo -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ── SEO Principal ──────────────────────────────────────── -->
+  <title>Fenix Salón Unisex | Peluquería & Barbería de Élite — Villa María, Córdoba</title>
+  <meta name="description"
+        content="Fenix Salón Unisex: peluquería, barbería y estética de élite en Villa María, Córdoba. Cortes, colorimetría, alisados, tratamientos capilares y más. Reservá tu turno online." />
+  <meta name="keywords"
+        content="peluquería Villa María, barbería Villa María, salón unisex Córdoba, corte de pelo, colorimetría, alisado, botox capilar, estética facial, Fenix salón" />
+  <meta name="author" content="Fenix Salón Unisex" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="theme-color" content="#0a0a0a" />
+
+  <!-- URL canónica: evita contenido duplicado -->
+  <link rel="canonical" href="https://fenixsalonunisex.com.ar/" />
+
+  <!-- Idioma alternativo (por si se añade versión en otro idioma) -->
+  <link rel="alternate" hreflang="es-ar" href="https://fenixsalonunisex.com.ar/" />
+
+  <!-- ── Open Graph (Facebook, WhatsApp, redes sociales) ──── -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://fenixsalonunisex.com.ar/" />
+  <meta property="og:title"       content="Fenix Salón Unisex | Peluquería & Barbería de Élite" />
+  <meta property="og:description" content="Peluquería, barbería y estética de élite en Villa María, Córdoba. Tu mejor versión comienza con un turno en Fenix." />
+  <meta property="og:image"       content="https://fenixsalonunisex.com.ar/og-image.jpg" />
+  <meta property="og:image:alt"   content="Fenix Salón Unisex — Peluquería y Barbería en Villa María" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height"content="630" />
+  <meta property="og:site_name"   content="Fenix Salón Unisex" />
+  <meta property="og:locale"      content="es_AR" />
+
+  <!-- ── Twitter / X Card ────────────────────────────────────── -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Fenix Salón Unisex | Peluquería & Barbería" />
+  <meta name="twitter:description" content="Tu mejor versión comienza con un turno en Fenix. Peluquería y barbería de élite en Villa María." />
+  <meta name="twitter:image"       content="https://fenixsalonunisex.com.ar/og-image.jpg" />
+  <meta name="twitter:image:alt"   content="Fenix Salón Unisex — Villa María, Córdoba" />
+
+  <!-- ── Accesibilidad adicional ──────────────────────────── -->
+  <!-- Color del sistema para alto contraste -->
+  <meta name="color-scheme" content="dark" />
+  <!-- Viewport accesible: no bloquea el zoom del usuario -->
+  <!-- Nota: no usamos user-scalable=no porque bloquea accesibilidad -->
+
+  <!-- ── Datos estructurados (Schema.org JSON-LD) ─────────── -->
+  <!-- Ayuda a Google a mostrar información rica en los resultados -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HairSalon",
+    "name": "Fenix Salón Unisex",
+    "alternateName": "Fenix Estética y Barbershop",
+    "url": "https://fenixsalonunisex.com.ar",
+    "logo": "https://fenixsalonunisex.com.ar/logo.png",
+    "image": "https://fenixsalonunisex.com.ar/og-image.jpg",
+    "description": "Salón de peluquería, barbería y estética unisex de élite en Villa María, Córdoba. Ofrecemos cortes, colorimetría, alisados, tratamientos capilares y cursos de formación.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Colombia 413",
+      "addressLocality": "Villa María",
+      "addressRegion": "Córdoba",
+      "addressCountry": "AR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -32.4167,
+      "longitude": -63.2333
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "09:00",
+        "closes": "13:00"
+      }
+    ],
+    "telephone": "",
+    "sameAs": [
+      "https://www.instagram.com/fenixesteticaybarbershop"
+    ],
+    "hasMap": "https://maps.google.com/?q=Colombia+413,+Villa+Maria,+Cordoba",
+    "priceRange": "$$",
+    "currenciesAccepted": "ARS",
+    "paymentAccepted": "Cash, Credit Card",
+    "servesCuisine": null,
+    "amenityFeature": [
+      { "@type": "LocationFeatureSpecification", "name": "Unisex", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Turno online", "value": true }
+    ]
+  }
+  </script>
+
+  <!-- Preconexión a servidores de fuentes (performance) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Tipografías: Bebas Neue (display) + Cormorant Garamond (serif) + DM Sans (body) -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet" />
+
+  <!-- Hoja de estilos principal -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Favicon básico (SVG inline adaptable) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230a0a0a'/><text y='.9em' font-size='90' x='5'>✂</text></svg>" />
+</head>
+
+<body>
+
+  <!-- ── Skip Link: accesibilidad para teclado/lector de pantalla ── -->
+  <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+
+  <!-- ── Cursor personalizado (desktop) ── -->
+  <div class="cursor"          aria-hidden="true"></div>
+  <div class="cursor-follower" aria-hidden="true"></div>
+
+  <!-- ─────────────────────────────────────────────────────────
+       NAVEGACIÓN
+  ───────────────────────────────────────────────────────────── -->
+  <header role="banner">
+    <nav class="nav" aria-label="Navegación principal">
+
+      <!-- Logo -->
+      <a class="nav__logo" href="/" aria-label="Fenix Salón Unisex — Inicio">FENIX</a>
+
+      <!-- Links desktop -->
+      <ul class="nav__links" role="list">
+        <li><a class="nav__link" href="#servicios">Servicios</a></li>
+        <li><a class="nav__link" href="#nosotros">Nosotros</a></li>
+        <li><a class="nav__link" href="#galeria">Galería</a></li>
+        <li><a class="nav__link" href="#contacto">Contacto</a></li>
+      </ul>
+
+      <!-- CTA desktop -->
+      <a class="nav__cta btn btn--accent"
+         href="https://fenixsalonunisex.com.ar/turnos"
+         target="_blank"
+         rel="noopener noreferrer"
+         aria-label="Reservar turno en Fenix (se abre en nueva pestaña)">
+        Reservar turno
+      </a>
+
+      <!-- Hamburger mobile -->
+      <button class="nav__hamburger"
+              aria-label="Abrir menú de navegación"
+              aria-expanded="false"
+              aria-controls="mobile-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+
+    <!-- Menú mobile overlay -->
+    <nav id="mobile-menu"
+         class="nav__mobile-menu"
+         aria-label="Menú móvil"
+         aria-hidden="true">
+      <ul role="list">
+        <li><a class="nav__link" href="#servicios">Servicios</a></li>
+        <li><a class="nav__link" href="#nosotros">Nosotros</a></li>
+        <li><a class="nav__link" href="#galeria">Galería</a></li>
+        <li><a class="nav__link" href="#contacto">Contacto</a></li>
+        <li>
+          <a class="btn btn--accent"
+             href="https://fenixsalonunisex.com.ar/turnos"
+             target="_blank" rel="noopener noreferrer"
+             style="margin-top:16px">
+            Reservar turno
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ─────────────────────────────────────────────────────────
+       CONTENIDO PRINCIPAL
+  ───────────────────────────────────────────────────────────── -->
+  <main id="main-content" tabindex="-1">
+
+    <!-- ══════════════════════════════════════════
+         HERO — Pantalla completa de entrada
+    ══════════════════════════════════════════ -->
+    <section class="hero" aria-labelledby="hero-title">
+
+      <!-- Panel izquierdo: texto -->
+      <div class="hero__left">
+
+        <!-- Eyebrow con línea dorada -->
+        <p class="hero__eyebrow t-label" aria-label="Salón Unisex en Villa María, Córdoba">
+          Salón Unisex · Villa María, Córdoba
+        </p>
+
+        <!-- Título principal -->
+        <h1 class="hero__title" id="hero-title">
+          El arte
+          <!-- La itálica serif da contraste editorial -->
+          <em class="hero__title-serif">del corte perfecto.</em>
+        </h1>
+
+        <!-- Descripción breve -->
+        <p class="hero__desc t-body">
+          Peluquería, barbería y estética de élite. Cada servicio,
+          una experiencia diseñada para revelar tu mejor versión.
+        </p>
+
+        <!-- Línea dorada divisoria -->
+        <div class="gold-line" style="max-width:280px; margin-bottom:32px" aria-hidden="true"></div>
+
+        <!-- Botones CTA -->
+        <div class="hero__cta">
+          <a class="btn btn--primary"
+             href="https://fenixsalonunisex.com.ar/turnos"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="Reservar turno en Fenix (se abre en nueva pestaña)">
+            Reservar turno
+          </a>
+          <a class="btn btn--outline" href="#servicios" aria-label="Ver todos los servicios">
+            Ver servicios →
+          </a>
+        </div>
+      </div>
+
+      <!-- Panel derecho: imagen (decorativa, oculta en mobile) -->
+      <div class="hero__right" aria-hidden="true">
+        <!-- Imagen de fondo con Ken Burns. Alt vacío porque es decorativa -->
+        <img class="hero__img"
+             src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=1200&q=85"
+             alt=""
+             role="presentation"
+             width="800" height="1200"
+             loading="eager"
+             fetchpriority="high" />
+
+        <!-- Contador decorativo -->
+        <div class="hero__badge">
+          <div class="hero__badge-num" aria-hidden="true">+10</div>
+          <div class="hero__badge-label">Años de experiencia</div>
+        </div>
+      </div>
+
+      <!-- Indicador de scroll -->
+      <div class="hero__scroll" aria-hidden="true">
+        <div class="hero__scroll-line"></div>
+        <span class="hero__scroll-text">Scroll</span>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         LÍNEA DORADA DIVISORIA + MARQUEE
+    ══════════════════════════════════════════ -->
+    <div class="gold-divider" role="separator" aria-hidden="true"></div>
+
+    <!-- ══ MARQUEE — ticker de servicios, animado en cualquier pantalla ══ -->
+    <!-- Todo el CSS está inline para que no dependa de style.css ni de clases externas -->
+    <section aria-label="Nuestros servicios" style="
+      background: #f5f4f0;
+      border-top: 1px solid #c9b99a;
+      border-bottom: 1px solid #c9b99a;
+      overflow: hidden;               /* corta el texto que sale por los bordes */
+      padding: 16px 0;
+      width: 100%;
+      box-sizing: border-box;
+    ">
+      <!-- Estilos de la animación: definidos aquí para garantizar que se carguen
+           antes del elemento, sin depender de ningún archivo externo -->
+      <style>
+        /* Keyframe: mueve el track exactamente su propio ancho hacia la izquierda.
+           Como el contenido está duplicado, cuando llega al 50% del recorrido
+           el loop es invisible — parece infinito. */
+        @keyframes fenix-ticker {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+
+        .fenix-ticker-track {
+          /* Fila horizontal que NO hace wrap */
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          align-items: center;
+
+          /* El ancho lo determina el contenido, no el contenedor */
+          width: max-content;
+
+          /* Animación: 20s, lineal, infinita */
+          animation: fenix-ticker 20s linear infinite;
+
+          /* Aceleración por GPU — clave para mobile */
+          will-change: transform;
+          transform: translateZ(0);
+          -webkit-transform: translateZ(0);
+        }
+
+        /* Pausa al pasar el mouse (solo desktop) */
+        .fenix-ticker-track:hover {
+          animation-play-state: paused;
+        }
+
+        .fenix-ticker-item {
+          font-family: 'Bebas Neue', 'Impact', sans-serif;
+          font-size: 14px;
+          letter-spacing: 0.18em;
+          color: #0a0a0a;
+          white-space: nowrap;
+          padding: 0 24px;
+          flex-shrink: 0;
+        }
+
+        .fenix-ticker-dot {
+          color: #c9b99a;
+          font-size: 8px;
+          flex-shrink: 0;
+          line-height: 1;
+        }
+      </style>
+
+      <!-- aria-hidden: el contenido es decorativo/redundante para lectores de pantalla -->
+      <div class="fenix-ticker-track" aria-hidden="true">
+        <!-- Primera copia del contenido -->
+        <span class="fenix-ticker-item">CORTE MASCULINO</span>
+        <span class="fenix-ticker-dot">◆</span>
+        <span class="fenix-ticker-item">CORTE FEMENINO</span>
+        <span class="fenix-ticker-dot">◆</span>
+        <span class="fenix-ticker-item">BARBERÍA</span>
+        <span class="fenix-ticker-dot">◆</span>
+        <span class="fenix-ticker-item">ALISADOS</span>
+        <span class="fenix-ticker-dot">◆</span>
+        <span class="fenix-ticker-item">TINTURA</span>
+        <span class="fenix-ticker-dot">◆</span>
+        <span class="fenix-ticker-item">BALAYAGE</span>
+        <span class="fenix-ticker-dot">◆</span>
+        <span class="fenix-ticker-item">NUTRICIÓN CAPILAR</span>
+        <span class="fenix-ticker-dot">◆</span>
+        <span class="fenix-ticker-item">ESTÉTICA FACIAL</span>
+        <span class="fenix-ticker-dot">◆</span>
+        <span class="fenix-ticker-item">BOTOX CAPILAR</span>
+        <span class="fenix-ticker-dot">◆</span>
+        <span class="fenix-ticker-item">CURSOS</span>
+        <span class="fenix-ticker-dot">◆</span>
+        <span class="fenix-ticker-item">LAVADO & BRUSHING</span>
+        <span class="fenix-ticker-dot">◆</span>
+        <span class="fenix-ticker-item">DEPILACIÓN</span>
+        <span class="fenix-ticker-dot">◆</span>
+        <!-- Segunda copia EXACTA — necesaria para que el loop sea invisible -->
+        <span class="fenix-ticker-item">CORTE MASCULINO</span>
+        <span class="fenix-ticker-dot">◆</span>
+        <span class="fenix-ticker-item">CORTE FEMENINO</span>
+        <span class="fenix-ticker-dot">◆</span>
+        <span class="fenix-ticker-item">BARBERÍA</span>
+        <span class="fenix-ticker-dot">◆</span>
+        <span class="fenix-ticker-item">ALISADOS</span>
+        <span class="fenix-ticker-dot">◆</span>
+        <span class="fenix-ticker-item">TINTURA</span>
+        <span class="fenix-ticker-dot">◆</span>
+        <span class="fenix-ticker-item">BALAYAGE</span>
+        <span class="fenix-ticker-dot">◆</span>
+        <span class="fenix-ticker-item">NUTRICIÓN CAPILAR</span>
+        <span class="fenix-ticker-dot">◆</span>
+        <span class="fenix-ticker-item">ESTÉTICA FACIAL</span>
+        <span class="fenix-ticker-dot">◆</span>
+        <span class="fenix-ticker-item">BOTOX CAPILAR</span>
+        <span class="fenix-ticker-dot">◆</span>
+        <span class="fenix-ticker-item">CURSOS</span>
+        <span class="fenix-ticker-dot">◆</span>
+        <span class="fenix-ticker-item">LAVADO & BRUSHING</span>
+        <span class="fenix-ticker-dot">◆</span>
+        <span class="fenix-ticker-item">DEPILACIÓN</span>
+        <span class="fenix-ticker-dot">◆</span>
+      </div>
+    </section>
+
+    <div class="gold-divider" role="separator" aria-hidden="true"></div>
+
+    <!-- ══════════════════════════════════════════
+         NOSOTROS
+    ══════════════════════════════════════════ -->
+    <section class="section" id="nosotros" aria-labelledby="about-title">
+      <div class="about">
+
+        <!-- Visual: fotos superpuestas -->
+        <div class="about__visual reveal" aria-hidden="true">
+          <img class="about__img-main"
+               src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=700&q=80"
+               alt="Interior del salón Fenix"
+               width="600" height="800"
+               loading="lazy" />
+          <img class="about__img-accent"
+               src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=400&q=80"
+               alt="Servicio de peluquería en Fenix"
+               width="400" height="400"
+               loading="lazy" />
+          <div class="about__tag" aria-hidden="true">FENIX · VILLA MARÍA</div>
+        </div>
+
+        <!-- Contenido textual -->
+        <div class="about__content">
+
+          <p class="t-label reveal">Sobre nosotros</p>
+
+          <h2 class="t-section reveal reveal--d1" id="about-title">
+            Centro integral de<br/>
+            <strong class="t-italic">belleza y formación.</strong>
+          </h2>
+
+          <!-- Línea dorada entre título y texto -->
+          <div class="gold-line reveal reveal--d2" style="max-width:200px; margin:24px 0" aria-hidden="true"></div>
+
+          <p class="t-body reveal reveal--d2">
+            Somos más que una peluquería. Somos un espacio donde el cuidado personal
+            se convierte en ritual. Ofrecemos servicios profesionales de peluquería,
+            estética y barbería, junto con programas de capacitación en técnicas de
+            vanguardia.
+          </p>
+
+          <p class="t-body reveal reveal--d3" style="margin-top:16px">
+            Cada cliente merece atención exclusiva. Nuestro equipo combina técnica
+            impecable con una mirada artística que transforma cada visita en una
+            experiencia memorable.
+          </p>
+
+          <!-- Stats -->
+          <div class="about__stats reveal reveal--d4">
+            <div class="about__stat">
+              <div class="stat__num">+10</div>
+              <div class="stat__label">Años en el rubro</div>
+            </div>
+            <div class="about__stat">
+              <div class="stat__num">100%</div>
+              <div class="stat__label">Unisex</div>
+            </div>
+            <div class="about__stat">
+              <div class="stat__num">Élite</div>
+              <div class="stat__label">Formación constante</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Línea dorada divisoria antes de servicios (negro→blanco) -->
+    <div style="height:2px; background: linear-gradient(90deg, transparent, var(--color-accent) 30%, var(--color-accent) 70%, transparent);" role="separator" aria-hidden="true"></div>
+
+    <!-- ══════════════════════════════════════════
+         SERVICIOS
+    ══════════════════════════════════════════ -->
+    <section class="section" id="servicios" aria-labelledby="services-title"
+             style="background: var(--color-white);">
+
+      <div class="services__header">
+        <div>
+          <p class="t-label reveal" style="color: rgba(201,185,154,0.8)">Lo que hacemos</p>
+          <h2 class="t-section reveal reveal--d1" id="services-title"
+              style="color: var(--color-black);">
+            Nuestros <em style="font-style:italic; color: var(--color-accent);">servicios.</em>
+          </h2>
+        </div>
+        <a class="btn btn--accent reveal reveal--d2"
+           href="https://fenixsalonunisex.com.ar/turnos"
+           target="_blank" rel="noopener noreferrer"
+           aria-label="Reservar turno ahora (se abre en nueva pestaña)">
+          Reservar ahora
+        </a>
+      </div>
+
+      <!-- Grid de servicios: 3 columnas desktop, 2 tablet, 1 mobile -->
+      <ul class="services__grid" role="list" aria-label="Lista de servicios">
+
+        <!-- Servicio 01 -->
+        <li class="service-card reveal" role="article">
+          <div class="service-card__num" aria-hidden="true">01</div>
+          <h3 class="service-card__name">Corte Masculino</h3>
+          <div class="service-card__line" aria-hidden="true"></div>
+          <p class="service-card__desc">
+            Corte + lavado + secado + scrub facial. La experiencia completa
+            para el hombre moderno.
+          </p>
+        </li>
+
+        <!-- Servicio 02 -->
+        <li class="service-card reveal reveal--d1" role="article">
+          <div class="service-card__num" aria-hidden="true">02</div>
+          <h3 class="service-card__name">Corte Femenino</h3>
+          <div class="service-card__line" aria-hidden="true"></div>
+          <p class="service-card__desc">
+            Corte a medida con técnica profesional que realza tu estilo
+            natural con precisión milimétrica.
+          </p>
+        </li>
+
+        <!-- Servicio 03 -->
+        <li class="service-card reveal reveal--d2" role="article">
+          <div class="service-card__num" aria-hidden="true">03</div>
+          <h3 class="service-card__name">Barbería Premium</h3>
+          <div class="service-card__line" aria-hidden="true"></div>
+          <p class="service-card__desc">
+            Barba con paños calientes, perfilado de cejas, scrub facial
+            y más. Un ritual completo para el caballero.
+          </p>
+        </li>
+
+        <!-- Servicio 04 -->
+        <li class="service-card reveal" role="article">
+          <div class="service-card__num" aria-hidden="true">04</div>
+          <h3 class="service-card__name">Colorimetría</h3>
+          <div class="service-card__line" aria-hidden="true"></div>
+          <p class="service-card__desc">
+            Tintura, balayage, reflejos y decoloración global. Color con
+            técnica y productos de élite.
+          </p>
+        </li>
+
+        <!-- Servicio 05 -->
+        <li class="service-card reveal reveal--d1" role="article">
+          <div class="service-card__num" aria-hidden="true">05</div>
+          <h3 class="service-card__name">Tratamientos Capilares</h3>
+          <div class="service-card__line" aria-hidden="true"></div>
+          <p class="service-card__desc">
+            Alisados, botox capilar, nutrición intensiva y cremas
+            silicionadas de alta gama para tu cabello.
+          </p>
+        </li>
+
+        <!-- Servicio 06 -->
+        <li class="service-card reveal reveal--d2" role="article">
+          <div class="service-card__num" aria-hidden="true">06</div>
+          <h3 class="service-card__name">Estética Facial</h3>
+          <div class="service-card__line" aria-hidden="true"></div>
+          <p class="service-card__desc">
+            Máscaras a base de oro, miel y aloe vera. Scrub con carbón
+            activado. Cuidado total para tu piel.
+          </p>
+        </li>
+
+      </ul>
+    </section>
+
+    <!-- Divisor dorado después de servicios (blanco→negro) -->
+    <div style="height:2px; background: linear-gradient(90deg, transparent, var(--color-accent) 30%, var(--color-accent) 70%, transparent);" role="separator" aria-hidden="true"></div>
+
+    <!-- ══════════════════════════════════════════
+         GALERÍA — Scroll horizontal de fotos
+    ══════════════════════════════════════════ -->
+    <section class="gallery" id="galeria" aria-labelledby="gallery-title">
+
+      <div class="gallery__label">
+        <p class="t-label reveal">Nuestro trabajo</p>
+        <h2 class="t-section reveal reveal--d1" id="gallery-title" style="margin-top:8px">
+          El salón <em class="t-italic">en imágenes.</em>
+        </h2>
+      </div>
+
+      <!-- Wrapper con drag-to-scroll -->
+      <div class="gallery__scroll-wrapper"
+           role="region"
+           aria-label="Galería de fotos del salón. Podés arrastrar para ver más."
+           tabindex="0">
+
+        <!-- Track: animación CSS de scroll continuo.
+             Las fotos del admin se insertan aquí via JS al inicio. -->
+        <div class="gallery__track" aria-label="Fotos">
+
+          <!-- Items placeholder (se marcan como "static" para que JS no los duplique) -->
+          <div class="gallery__item gallery__item--static">
+            <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&q=80"
+                 alt="Corte de cabello en Fenix Salón"
+                 width="300" height="420"
+                 loading="lazy" />
+            <span class="gallery__caption" aria-hidden="true">Corte</span>
+          </div>
+
+          <div class="gallery__item gallery__item--static">
+            <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=600&q=80"
+                 alt="Servicio de peluquería profesional"
+                 width="300" height="420"
+                 loading="lazy" />
+            <span class="gallery__caption" aria-hidden="true">Estilo</span>
+          </div>
+
+          <div class="gallery__item gallery__item--static">
+            <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&q=80"
+                 alt="Servicio de barbería en Fenix"
+                 width="300" height="420"
+                 loading="lazy" />
+            <span class="gallery__caption" aria-hidden="true">Barbería</span>
+          </div>
+
+          <div class="gallery__item gallery__item--static">
+            <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&q=80"
+                 alt="Tratamiento capilar en el salón"
+                 width="300" height="420"
+                 loading="lazy" />
+            <span class="gallery__caption" aria-hidden="true">Tratamiento</span>
+          </div>
+
+          <div class="gallery__item gallery__item--static">
+            <img src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?w=600&q=80"
+                 alt="Interior del salón Fenix"
+                 width="300" height="420"
+                 loading="lazy" />
+            <span class="gallery__caption" aria-hidden="true">El salón</span>
+          </div>
+
+          <div class="gallery__item gallery__item--static">
+            <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=600&q=80"
+                 alt="Colorimetría profesional en Fenix"
+                 width="300" height="420"
+                 loading="lazy" />
+            <span class="gallery__caption" aria-hidden="true">Color</span>
+          </div>
+
+          <!-- Duplicados para el loop seamless de la animación CSS -->
+          <div class="gallery__item" aria-hidden="true">
+            <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&q=80"
+                 alt="" width="300" height="420" loading="lazy" />
+          </div>
+          <div class="gallery__item" aria-hidden="true">
+            <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=600&q=80"
+                 alt="" width="300" height="420" loading="lazy" />
+          </div>
+          <div class="gallery__item" aria-hidden="true">
+            <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&q=80"
+                 alt="" width="300" height="420" loading="lazy" />
+          </div>
+          <div class="gallery__item" aria-hidden="true">
+            <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&q=80"
+                 alt="" width="300" height="420" loading="lazy" />
+          </div>
+          <div class="gallery__item" aria-hidden="true">
+            <img src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?w=600&q=80"
+                 alt="" width="300" height="420" loading="lazy" />
+          </div>
+          <div class="gallery__item" aria-hidden="true">
+            <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=600&q=80"
+                 alt="" width="300" height="420" loading="lazy" />
+          </div>
+
+        </div><!-- /.gallery__track -->
+      </div><!-- /.gallery__scroll-wrapper -->
+
+      <!-- Controles de teclado para la galería -->
+      <div class="gallery__controls">
+        <button class="gallery__btn gallery__btn--prev"
+                aria-label="Foto anterior">←</button>
+        <button class="gallery__btn gallery__btn--next"
+                aria-label="Foto siguiente">→</button>
+        <span class="t-label" style="margin-left:auto; color:var(--color-gray-light)">
+          Arrastrá para explorar
+        </span>
+      </div>
+
+    </section>
+
+    <!-- Línea dorada divisoria -->
+    <div class="gold-divider" role="separator" aria-hidden="true"></div>
+
+    <!-- ══════════════════════════════════════════
+         BANDA CTA — Llamada a la acción
+    ══════════════════════════════════════════ -->
+    <section aria-label="Reservar turno en Fenix">
+      <div class="cta-band reveal">
+        <div>
+          <p class="t-label cta-band__label">¿Listo para el cambio?</p>
+          <h2 class="cta-band__title">
+            Tu mejor versión<br/>
+            <em>comienza con un turno.</em>
+          </h2>
+        </div>
+        <a class="btn btn--primary"
+           href="https://fenixsalonunisex.com.ar/turnos"
+           target="_blank" rel="noopener noreferrer"
+           style="flex-shrink:0; font-size:11px"
+           aria-label="Reservar mi turno ahora en Fenix (se abre en nueva pestaña)">
+          Reservar mi turno →
+        </a>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         CONTACTO / INFO
+    ══════════════════════════════════════════ -->
+    <section id="contacto" aria-labelledby="contact-title">
+      <h2 class="sr-only" id="contact-title">Información de contacto</h2>
+
+      <div class="contact-grid">
+
+        <!-- Ubicación -->
+        <div class="contact-block reveal">
+          <h3 class="contact-block__title">Ubicación</h3>
+          <address>
+            <strong>Colombia 413</strong>
+            Villa María, Córdoba<br/>
+            Argentina
+          </address>
+          <a class="social-link"
+             href="https://maps.google.com/?q=Colombia+413,+Villa+Maria,+Cordoba+Argentina"
+             target="_blank" rel="noopener noreferrer"
+             aria-label="Ver en Google Maps (se abre en nueva pestaña)"
+             style="margin-top:16px">
+            Ver en el mapa
+          </a>
+        </div>
+
+        <!-- Horarios -->
+        <div class="contact-block reveal reveal--d1">
+          <h3 class="contact-block__title">Horarios</h3>
+          <p>
+            <strong>Lunes a Viernes</strong>
+            9:00 am — 13:00 pm
+          </p>
+          <p style="margin-top:12px; font-size:12px; color:rgba(245,244,240,0.25); letter-spacing:0.08em">
+            Reserva tu turno para asegurar tu lugar.
+          </p>
+        </div>
+
+        <!-- Redes y links -->
+        <div class="contact-block reveal reveal--d2">
+          <h3 class="contact-block__title">Seguinos</h3>
+          <nav aria-label="Redes sociales y enlaces" class="social-links">
+            <a class="social-link"
+               href="https://www.instagram.com/fenixesteticaybarbershop"
+               target="_blank" rel="noopener noreferrer"
+               aria-label="Fenix en Instagram (se abre en nueva pestaña)">
+              @fenixesteticaybarbershop
+            </a>
+            <a class="social-link"
+               href="https://fenixsalonunisex.com.ar/cursos-y-capacitaciones"
+               target="_blank" rel="noopener noreferrer"
+               aria-label="Ver cursos y capacitaciones (se abre en nueva pestaña)">
+              Cursos y Capacitaciones
+            </a>
+            <a class="social-link"
+               href="https://fenixsalonunisex.com.ar/turnos"
+               target="_blank" rel="noopener noreferrer"
+               aria-label="Reservar turno online (se abre en nueva pestaña)">
+              Reservar turno online
+            </a>
+          </nav>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─────────────────────────────────────────────────────────
+       FOOTER
+  ───────────────────────────────────────────────────────────── -->
+  <footer class="footer" role="contentinfo">
+    <p class="footer__copy">
+      © 2025 Fenix Salón Unisex. Villa María, Córdoba.
+    </p>
+    <span class="footer__logo" aria-hidden="true">FENIX</span>
+    <a class="footer__admin-link" href="admin.html" aria-label="Ir al panel de administración de fotos">
+      Panel de fotos
+    </a>
+  </footer>
+
+  <!-- Toast de notificaciones (generado por JS) -->
+
+  <!-- Script principal (defer: no bloquea el render) -->
+  <script src="main.js" defer></script>
+
+</body>
+</html>

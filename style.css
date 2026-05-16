@@ -1,0 +1,1676 @@
+/* ============================================================
+   FENIX SALÓN UNISEX — style.css
+   Hoja de estilos principal compartida entre index.html y admin.html
+   
+   Estructura:
+   1. Variables CSS (tokens de diseño)
+   2. Reset & Base
+   3. Tipografía
+   4. Accesibilidad
+   5. Cursor personalizado
+   6. Navegación
+   7. Componentes reutilizables (botones, etiquetas, líneas)
+   8. Hero
+   9. Marquee / scroll infinito
+   10. Sección Nosotros
+   11. Servicios
+   12. Galería / scroll de fotos
+   13. Banda CTA
+   14. Contacto / Info
+   15. Footer
+   16. Admin panel
+   17. Responsive
+   ============================================================ */
+
+
+/* ============================================================
+   1. VARIABLES CSS — Design Tokens
+   ============================================================ */
+:root {
+  /* — Paleta de colores — */
+  --color-black:      #0a0a0a;   /* Negro profundo (fondo principal) */
+  --color-black-soft: #111111;   /* Negro suave para tarjetas */
+  --color-carbon:     #1a1a1a;   /* Carbón para fondos alternativos */
+  --color-carbon-mid: #2a2a2a;   /* Carbón medio para bordes y divisores */
+  --color-white:      #f5f4f0;   /* Blanco crudo (texto principal) */
+  --color-gray:       #888888;   /* Gris neutro (textos secundarios) */
+  --color-gray-light: #555555;   /* Gris claro para detalles */
+  --color-accent:     #c9b99a;   /* Dorado arena (acento de marca) */
+  --color-accent-dim: rgba(201,185,154,0.15); /* Dorado con transparencia */
+  --color-accent-line:rgba(201,185,154,0.35); /* Dorado para líneas decorativas */
+
+  /* — Tipografía — */
+  --font-display: 'Bebas Neue', sans-serif;           /* Títulos grandes e impactantes */
+  --font-serif:   'Cormorant Garamond', serif;        /* Subtítulos elegantes en itálica */
+  --font-body:    'DM Sans', sans-serif;              /* Cuerpo: legibilidad máxima */
+
+  /* — Espaciado base — */
+  --space-xs:  8px;
+  --space-sm:  16px;
+  --space-md:  32px;
+  --space-lg:  64px;
+  --space-xl:  120px;
+  --space-xxl: 160px;
+
+  /* — Padding horizontal de secciones — */
+  --section-pad: clamp(24px, 5vw, 80px);
+
+  /* — Transiciones — */
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-sharp:  cubic-bezier(0.77, 0, 0.18, 1);
+  --duration-fast: 0.2s;
+  --duration-mid:  0.4s;
+  --duration-slow: 0.7s;
+
+  /* — Grosor de líneas doradas — */
+  --line-thin:  0.5px;
+  --line-mid:   1px;
+  --line-thick: 2px;
+}
+
+
+/* ============================================================
+   2. RESET & BASE
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Previene flash de contenido sin estilos */
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+  /* Cursor oculto en desktop para mostrar el cursor personalizado */
+  cursor: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Restaurar cursor en móvil (sin hover, sin cursor custom) */
+@media (hover: none) {
+  body { cursor: auto; }
+  .cursor,
+  .cursor-follower { display: none; }
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  cursor: none; /* Cursor custom también en botones */
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+/* Scrollbar minimalista */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--color-black); }
+::-webkit-scrollbar-thumb { background: var(--color-accent); border-radius: 2px; }
+
+
+/* ============================================================
+   3. TIPOGRAFÍA — Jerarquía visual
+   ============================================================ */
+
+/* Título display: máximo impacto, mínimo espacio */
+.t-display {
+  font-family: var(--font-display);
+  font-size: clamp(64px, 10vw, 140px);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  color: var(--color-white);
+}
+
+/* Título grande de sección */
+.t-section {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 5vw, 60px);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--color-white);
+}
+
+/* Itálica del serif para contraste */
+.t-italic {
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+/* Etiqueta de sección (eyebrow) */
+.t-label {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+/* Texto de cuerpo secundario */
+.t-body {
+  font-size: 14px;
+  line-height: 1.9;
+  color: rgba(245,244,240,0.5);
+}
+
+
+/* ============================================================
+   4. ACCESIBILIDAD
+   ============================================================ */
+
+/* Focus visible solo con teclado (no con mouse) */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Saltar al contenido principal para lectores de pantalla */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  background: var(--color-accent);
+  color: var(--color-black);
+  padding: 8px 16px;
+  font-weight: 700;
+  font-size: 13px;
+  z-index: 9999;
+  border-radius: 0 0 4px 4px;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* Texto solo para lectores de pantalla */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Reducir movimiento para usuarios con preferencia */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* ============================================================
+   5. CURSOR PERSONALIZADO
+   ============================================================ */
+
+/* Punto central del cursor */
+.cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 8px;
+  height: 8px;
+  background: var(--color-white);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform var(--duration-fast) ease,
+              background var(--duration-fast) ease,
+              opacity var(--duration-fast) ease;
+  mix-blend-mode: difference;
+  will-change: transform;
+}
+
+/* Anillo seguidor del cursor */
+.cursor-follower {
+  position: fixed;
+  top: 0; left: 0;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(201,185,154,0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width var(--duration-mid) var(--ease-smooth),
+              height var(--duration-mid) var(--ease-smooth),
+              opacity var(--duration-mid) ease;
+  will-change: transform;
+}
+
+/* Estado hover del cursor: se expande */
+.cursor.is-hovering {
+  transform: translate(-50%, -50%) scale(3);
+  opacity: 0.5;
+}
+.cursor-follower.is-hovering {
+  width: 64px;
+  height: 64px;
+  opacity: 0.3;
+}
+
+
+/* ============================================================
+   6. NAVEGACIÓN
+   ============================================================ */
+
+.nav {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 200;
+  padding: 24px var(--section-pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  /* Transición al hacer scroll */
+  transition: background var(--duration-mid) ease,
+              border-color var(--duration-mid) ease,
+              padding var(--duration-mid) ease;
+}
+
+/* Nav con fondo al scrollear */
+.nav.is-scrolled {
+  background: rgba(10,10,10,0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201,185,154,0.12);
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+/* Logo */
+.nav__logo {
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: 0.15em;
+  color: var(--color-white);
+  transition: color var(--duration-fast) ease;
+  flex-shrink: 0;
+}
+.nav__logo:hover { color: var(--color-accent); }
+
+/* Links del nav */
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 3vw, 48px);
+}
+
+.nav__link {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(245,244,240,0.6);
+  transition: color var(--duration-fast) ease;
+  position: relative;
+}
+
+/* Línea dorada bajo el link al hover */
+.nav__link::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 1px;
+  background: var(--color-accent);
+  transition: width var(--duration-mid) var(--ease-smooth);
+}
+.nav__link:hover { color: var(--color-white); }
+.nav__link:hover::after { width: 100%; }
+
+/* Botón CTA del nav */
+.nav__cta {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-black);
+  background: var(--color-accent);
+  padding: 10px 22px;
+  transition: background var(--duration-fast) ease,
+              transform var(--duration-fast) ease;
+  flex-shrink: 0;
+}
+.nav__cta:hover {
+  background: var(--color-white);
+  transform: translateY(-2px);
+}
+
+/* Menú hamburguesa (solo mobile) */
+.nav__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 4px;
+  cursor: none;
+}
+.nav__hamburger span {
+  display: block;
+  width: 24px; height: 1.5px;
+  background: var(--color-white);
+  transition: transform var(--duration-mid) ease,
+              opacity var(--duration-mid) ease;
+}
+/* Estado abierto del hamburger */
+.nav__hamburger.is-open span:nth-child(1) {
+  transform: rotate(45deg) translate(4.5px, 4.5px);
+}
+.nav__hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+.nav__hamburger.is-open span:nth-child(3) {
+  transform: rotate(-45deg) translate(4.5px, -4.5px);
+}
+
+/* Menú mobile overlay */
+.nav__mobile-menu {
+  position: fixed;
+  inset: 0;
+  background: var(--color-black);
+  z-index: 199;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-mid) ease;
+}
+.nav__mobile-menu.is-open {
+  opacity: 1;
+  pointer-events: all;
+}
+.nav__mobile-menu .nav__link {
+  font-size: 13px;
+  letter-spacing: 0.3em;
+}
+
+
+/* ============================================================
+   7. COMPONENTES REUTILIZABLES
+   ============================================================ */
+
+/* — Botón primario (blanco sobre negro) — */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 15px 32px;
+  transition: transform var(--duration-fast) ease,
+              background var(--duration-fast) ease,
+              color var(--duration-fast) ease;
+}
+
+.btn--primary {
+  background: var(--color-white);
+  color: var(--color-black);
+}
+.btn--primary:hover {
+  background: var(--color-accent);
+  transform: translateY(-3px);
+}
+
+.btn--outline {
+  background: transparent;
+  color: rgba(245,244,240,0.55);
+  border-bottom: 1px solid rgba(245,244,240,0.2);
+  padding-left: 0; padding-right: 0;
+}
+.btn--outline:hover {
+  color: var(--color-white);
+  border-color: var(--color-accent);
+}
+
+.btn--accent {
+  background: var(--color-accent);
+  color: var(--color-black);
+}
+.btn--accent:hover {
+  background: var(--color-white);
+  transform: translateY(-3px);
+}
+
+/* — Línea decorativa dorada — */
+/* Línea horizontal fina con destellos dorados */
+.gold-line {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-accent-line) 20%,
+    var(--color-accent) 50%,
+    var(--color-accent-line) 80%,
+    transparent 100%
+  );
+  flex-shrink: 0;
+}
+
+/* Línea decorativa que atraviesa el negro de lado a lado */
+.gold-divider {
+  position: relative;
+  height: 1px;
+  overflow: hidden;
+}
+.gold-divider::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-accent-line) 15%,
+    var(--color-accent) 35%,
+    rgba(201,185,154,0.8) 50%,
+    var(--color-accent) 65%,
+    var(--color-accent-line) 85%,
+    transparent
+  );
+}
+/* Punto dorado central en las líneas decorativas */
+.gold-divider::after {
+  content: '◆';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 6px;
+  color: var(--color-accent);
+  background: var(--color-black);
+  padding: 0 8px;
+}
+
+/* — Sección wrapper — */
+.section {
+  padding: var(--space-xl) var(--section-pad);
+  position: relative;
+}
+
+/* — Cabecera de sección — */
+.section__header {
+  margin-bottom: clamp(40px, 6vw, 80px);
+}
+
+/* — Reveal on scroll — */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.9s var(--ease-smooth),
+              transform 0.9s var(--ease-smooth);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Delays escalonados para grupos de elementos */
+.reveal--d1 { transition-delay: 0.1s; }
+.reveal--d2 { transition-delay: 0.2s; }
+.reveal--d3 { transition-delay: 0.3s; }
+.reveal--d4 { transition-delay: 0.4s; }
+.reveal--d5 { transition-delay: 0.5s; }
+
+
+/* ============================================================
+   8. HERO
+   ============================================================ */
+
+.hero {
+  min-height: 100dvh; /* Dynamic viewport height para mobile */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Panel izquierdo: contenido textual */
+.hero__left {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 120px var(--section-pad) 80px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Eyebrow con punto dorado antes */
+.hero__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.hero__eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 32px; height: 1px;
+  background: var(--color-accent);
+}
+
+/* Título principal del hero */
+.hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(68px, 9vw, 130px);
+  line-height: 0.88;
+  letter-spacing: 0.02em;
+  color: var(--color-white);
+  margin-bottom: 8px;
+}
+
+/* Línea en itálica serif debajo del display */
+.hero__title-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(32px, 4.5vw, 62px);
+  color: var(--color-accent);
+  line-height: 1.1;
+  margin-bottom: var(--space-md);
+  display: block;
+}
+
+.hero__desc {
+  max-width: 340px;
+  margin-bottom: var(--space-md);
+}
+
+.hero__cta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Panel derecho: imagen */
+.hero__right {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Degradado de fundido desde la izquierda sobre la imagen */
+.hero__right::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    var(--color-black) 0%,
+    rgba(10,10,10,0.5) 40%,
+    transparent 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: grayscale(100%) contrast(1.05);
+  /* Ken Burns sutil: pequeño zoom continuo */
+  animation: kenBurns 18s ease-in-out infinite alternate;
+}
+
+/* Contador decorativo (años de experiencia) */
+.hero__badge {
+  position: absolute;
+  bottom: 48px;
+  right: var(--section-pad);
+  z-index: 2;
+  text-align: right;
+}
+.hero__badge-num {
+  font-family: var(--font-display);
+  font-size: 80px;
+  line-height: 1;
+  color: rgba(201,185,154,0.15);
+}
+.hero__badge-label {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+/* Línea dorada vertical en el borde de la imagen */
+.hero__right::after {
+  content: '';
+  position: absolute;
+  top: 10%; bottom: 10%;
+  left: 0;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--color-accent) 30%,
+    var(--color-accent) 70%,
+    transparent
+  );
+  z-index: 2;
+}
+
+/* Scroll indicator en el hero */
+.hero__scroll {
+  position: absolute;
+  bottom: 32px;
+  left: var(--section-pad);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 3;
+}
+.hero__scroll-line {
+  width: 40px;
+  height: 1px;
+  background: var(--color-accent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+.hero__scroll-text {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(245,244,240,0.4);
+}
+
+/* Entrada animada del hero */
+.hero__left > * {
+  opacity: 0;
+  transform: translateY(24px);
+}
+.hero__left.is-loaded > *:nth-child(1) { animation: heroIn 1s var(--ease-smooth) 0.2s forwards; }
+.hero__left.is-loaded > *:nth-child(2) { animation: heroIn 1s var(--ease-smooth) 0.4s forwards; }
+.hero__left.is-loaded > *:nth-child(3) { animation: heroIn 1s var(--ease-smooth) 0.55s forwards; }
+.hero__left.is-loaded > *:nth-child(4) { animation: heroIn 1s var(--ease-smooth) 0.7s forwards; }
+.hero__left.is-loaded > *:nth-child(5) { animation: heroIn 1s var(--ease-smooth) 0.85s forwards; }
+
+
+/* ============================================================
+   9. MARQUEE — Scroll infinito de servicios
+   ============================================================ */
+
+.marquee {
+  background: var(--color-white);
+  overflow: hidden;
+  padding: 18px 0;
+  /* Líneas doradas arriba y abajo del marquee */
+  border-top: 1px solid var(--color-accent);
+  border-bottom: 1px solid var(--color-accent);
+  position: relative;
+  z-index: 10;
+}
+
+/* Track que se mueve infinitamente */
+.marquee__track {
+  display: flex;
+  white-space: nowrap;
+  /* La animación mueve el track al 50% (segunda copia) para loop seamless */
+  animation: marqueeScroll 22s linear infinite;
+  width: max-content;
+  /* Aceleración por hardware: garantiza animación suave en mobile */
+  will-change: transform;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* Pausa al hover */
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
+}
+
+.marquee__item {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 0.18em;
+  color: var(--color-black);
+  padding: 0 28px;
+}
+
+/* Separador decorativo entre items */
+.marquee__dot {
+  color: var(--color-accent);
+  font-size: 8px;
+  padding: 0 4px;
+  align-self: center;
+}
+
+
+/* ============================================================
+   10. SECCIÓN NOSOTROS
+   ============================================================ */
+
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 100px);
+  align-items: center;
+}
+
+/* Visual con fotos superpuestas */
+.about__visual {
+  position: relative;
+}
+
+.about__img-main {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  filter: grayscale(100%);
+  display: block;
+}
+
+/* Segunda foto superpuesta en la esquina inferior */
+.about__img-accent {
+  position: absolute;
+  bottom: -32px;
+  right: -32px;
+  width: 52%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  filter: grayscale(100%) brightness(0.75);
+  border: 6px solid var(--color-black);
+}
+
+/* Etiqueta vertical en el borde */
+.about__tag {
+  position: absolute;
+  top: 40px;
+  right: -20px;
+  background: var(--color-white);
+  color: var(--color-black);
+  padding: 10px 16px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+/* Línea dorada lateral de la imagen */
+.about__visual::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  left: -20px;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--color-accent) 20%,
+    var(--color-accent) 80%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* Stats horizontales */
+.about__stats {
+  display: flex;
+  gap: clamp(24px, 4vw, 56px);
+  border-top: 1px solid rgba(245,244,240,0.1);
+  padding-top: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.stat__num {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 52px);
+  color: var(--color-white);
+  line-height: 1;
+}
+
+.stat__label {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-gray);
+  margin-top: 6px;
+}
+
+
+/* ============================================================
+   11. SERVICIOS
+   ============================================================ */
+
+.services__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: clamp(40px, 6vw, 72px);
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Grid 3 columnas separadas por líneas de 1px color carbon */
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(201,185,154,0.18); /* Líneas doradas entre tarjetas */
+}
+
+/* Tarjeta de servicio — fondo BLANCO permanente, sin hover de inversión */
+.service-card {
+  background: var(--color-white);
+  padding: clamp(28px, 4vw, 52px) clamp(20px, 3vw, 36px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Línea dorada en la parte superior de cada card */
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-accent-line),
+    var(--color-accent),
+    var(--color-accent-line),
+    transparent
+  );
+}
+
+/* Eliminar el fondo animado hover — ya no se necesita */
+.service-card::after {
+  display: none;
+}
+
+/* Número de servicio */
+.service-card__num {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--color-accent);
+  margin-bottom: var(--space-md);
+}
+
+/* Nombre del servicio */
+.service-card__name {
+  font-family: var(--font-serif);
+  font-size: clamp(18px, 2.5vw, 26px);
+  font-weight: 400;
+  color: var(--color-black); /* Negro sobre blanco */
+  margin-bottom: var(--space-sm);
+}
+
+/* Línea decorativa dorada entre nombre y descripción */
+.service-card__line {
+  width: 28px;
+  height: 1px;
+  background: var(--color-accent);
+  margin-bottom: var(--space-sm);
+}
+
+/* Texto descriptivo */
+.service-card__desc {
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(10,10,10,0.5); /* Gris oscuro sobre blanco */
+}
+
+
+/* ============================================================
+   12. GALERÍA — Scroll horizontal animado
+   ============================================================ */
+
+.gallery {
+  padding: var(--space-lg) 0;
+  overflow: hidden;
+}
+
+.gallery__label {
+  padding: 0 var(--section-pad);
+  margin-bottom: var(--space-md);
+}
+
+/* El scroll de fotos: se mueve con JS (drag) o con animación CSS */
+.gallery__scroll-wrapper {
+  overflow: hidden;
+  cursor: grab;
+  position: relative;
+}
+.gallery__scroll-wrapper:active {
+  cursor: grabbing;
+}
+
+/* Track interno con fotos: animación CSS para el scroll automático */
+.gallery__track {
+  display: flex;
+  gap: 8px;
+  padding: 0 var(--section-pad);
+  /* Ancho: suficiente para que el scroll funcione */
+  width: max-content;
+  /* Animación continua de scroll horizontal */
+  animation: galleryScroll 35s linear infinite;
+  will-change: transform;
+}
+
+/* Pausa si el usuario interactúa */
+.gallery__track.is-paused,
+.gallery__scroll-wrapper:hover .gallery__track {
+  animation-play-state: paused;
+}
+
+/* Ítem de galería */
+.gallery__item {
+  flex: 0 0 300px;
+  height: 420px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.gallery__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: transform var(--duration-slow) var(--ease-smooth),
+              filter var(--duration-slow) ease;
+  pointer-events: none;
+}
+.gallery__item:hover img {
+  transform: scale(1.06);
+  filter: grayscale(70%);
+}
+
+/* Caption al hover */
+.gallery__caption {
+  position: absolute;
+  bottom: 16px; left: 16px;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity var(--duration-mid) ease, transform var(--duration-mid) ease;
+}
+.gallery__item:hover .gallery__caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Línea dorada inferior del ítem */
+.gallery__item::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  opacity: 0;
+  transition: opacity var(--duration-mid) ease;
+}
+.gallery__item:hover::after { opacity: 1; }
+
+/* Controles de navegación de galería */
+.gallery__controls {
+  display: flex;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--section-pad) 0;
+  align-items: center;
+}
+
+.gallery__btn {
+  width: 44px; height: 44px;
+  border: 1px solid rgba(201,185,154,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent);
+  font-size: 18px;
+  transition: background var(--duration-fast) ease,
+              border-color var(--duration-fast) ease;
+}
+.gallery__btn:hover {
+  background: var(--color-accent);
+  color: var(--color-black);
+  border-color: var(--color-accent);
+}
+
+
+/* ============================================================
+   13. BANDA CTA — Llamada a la acción
+   ============================================================ */
+
+.cta-band {
+  margin: 0 var(--section-pad) var(--space-xl);
+  background: var(--color-white);
+  padding: clamp(48px, 8vw, 80px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  position: relative;
+  overflow: hidden;
+  flex-wrap: wrap;
+}
+
+/* Texto de fondo decorativo */
+.cta-band::before {
+  content: 'FENIX';
+  position: absolute;
+  right: -20px; top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-size: 180px;
+  color: rgba(10,10,10,0.04);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Línea dorada superior del CTA */
+.cta-band::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-accent) 30%,
+    var(--color-accent) 70%,
+    transparent
+  );
+}
+
+.cta-band__label {
+  color: var(--color-black);
+  opacity: 0.4;
+}
+
+.cta-band__title {
+  font-family: var(--font-serif);
+  font-size: clamp(26px, 4vw, 46px);
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--color-black);
+}
+.cta-band__title em {
+  font-style: italic;
+}
+
+
+/* ============================================================
+   14. CONTACTO / INFO
+   ============================================================ */
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(201,185,154,0.08); /* Grilla dorada */
+  border-top: 1px solid var(--color-accent-line);
+}
+
+.contact-block {
+  background: var(--color-black);
+  padding: clamp(40px, 5vw, 64px) var(--section-pad);
+}
+
+.contact-block__title {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-md);
+}
+
+.contact-block p,
+.contact-block address {
+  font-style: normal;
+  font-size: 14px;
+  line-height: 2;
+  color: rgba(245,244,240,0.45);
+}
+
+.contact-block strong {
+  display: block;
+  font-weight: 400;
+  color: var(--color-white);
+  margin-bottom: 4px;
+}
+
+/* Links sociales */
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.social-link {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245,244,240,0.35);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: color var(--duration-fast) ease,
+              gap var(--duration-fast) ease;
+}
+.social-link::before {
+  content: '→';
+  color: var(--color-accent);
+  font-size: 11px;
+}
+.social-link:hover {
+  color: var(--color-white);
+  gap: 16px;
+}
+
+
+/* ============================================================
+   15. FOOTER
+   ============================================================ */
+
+.footer {
+  border-top: 1px solid rgba(201,185,154,0.12);
+  padding: 28px var(--section-pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.footer__copy {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: rgba(245,244,240,0.2);
+}
+
+.footer__logo {
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 0.2em;
+  color: rgba(245,244,240,0.12);
+}
+
+.footer__admin-link {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(201,185,154,0.3);
+  transition: color var(--duration-fast) ease;
+}
+.footer__admin-link:hover { color: var(--color-accent); }
+
+
+/* ============================================================
+   16. ADMIN PANEL — Panel de carga de fotos
+   ============================================================ */
+
+/* Fondo y layout del admin */
+.admin-body {
+  min-height: 100vh;
+  padding: 100px var(--section-pad) var(--space-xl);
+}
+
+/* Header del admin */
+.admin-header {
+  margin-bottom: var(--space-xl);
+}
+
+.admin-header .gold-divider {
+  margin-top: var(--space-md);
+}
+
+/* Sección de upload */
+.upload-section {
+  margin-bottom: var(--space-xl);
+}
+
+.upload-section__title {
+  margin-bottom: var(--space-md);
+}
+
+/* Zona de arrastrar y soltar */
+.dropzone {
+  border: 1px solid rgba(201,185,154,0.25);
+  padding: clamp(40px, 6vw, 80px) var(--section-pad);
+  text-align: center;
+  position: relative;
+  transition: border-color var(--duration-mid) ease,
+              background var(--duration-mid) ease;
+  cursor: none;
+}
+
+/* Líneas doradas en las esquinas del dropzone */
+.dropzone::before,
+.dropzone::after {
+  content: '';
+  position: absolute;
+  width: 32px; height: 32px;
+}
+.dropzone::before {
+  top: 12px; left: 12px;
+  border-top: 1px solid var(--color-accent);
+  border-left: 1px solid var(--color-accent);
+}
+.dropzone::after {
+  bottom: 12px; right: 12px;
+  border-bottom: 1px solid var(--color-accent);
+  border-right: 1px solid var(--color-accent);
+}
+
+/* Estado activo del dropzone (cuando arrastras una foto) */
+.dropzone.is-active {
+  border-color: var(--color-accent);
+  background: var(--color-accent-dim);
+}
+
+.dropzone__icon {
+  font-size: 40px;
+  margin-bottom: var(--space-sm);
+  opacity: 0.4;
+}
+
+.dropzone__text {
+  font-size: 14px;
+  color: rgba(245,244,240,0.45);
+  margin-bottom: var(--space-sm);
+}
+
+.dropzone__text strong {
+  color: var(--color-accent);
+  font-weight: 400;
+}
+
+.dropzone__formats {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(245,244,240,0.25);
+}
+
+/* Input file oculto */
+.dropzone__input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+/* Grid de previsualización de fotos cargadas */
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: var(--space-md);
+}
+
+/* Ítem de previsualización */
+.preview-item {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--color-carbon);
+}
+
+/* Borde dorado en el ítem de previsualización */
+.preview-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(201,185,154,0.15);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.preview-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Overlay de acciones al hover */
+.preview-item__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10,10,10,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  opacity: 0;
+  transition: opacity var(--duration-mid) ease;
+  z-index: 3;
+}
+.preview-item:hover .preview-item__overlay {
+  opacity: 1;
+}
+
+/* Botón de eliminar dentro del overlay */
+.preview-item__delete {
+  width: 40px; height: 40px;
+  border: 1px solid rgba(255,100,100,0.5);
+  color: rgba(255,100,100,0.8);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  transition: background var(--duration-fast) ease;
+  cursor: none;
+}
+.preview-item__delete:hover {
+  background: rgba(255,100,100,0.2);
+  border-color: rgba(255,100,100,0.8);
+}
+
+/* Nombre de la foto */
+.preview-item__name {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 8px 10px;
+  background: linear-gradient(to top, rgba(10,10,10,0.9), transparent);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: rgba(245,244,240,0.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  z-index: 2;
+}
+
+/* Mensaje vacío */
+.preview-empty {
+  padding: var(--space-lg) var(--section-pad);
+  text-align: center;
+  border: 1px dashed rgba(201,185,154,0.15);
+  color: rgba(245,244,240,0.2);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+}
+
+/* Barra de acciones del admin */
+.admin-actions {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  align-items: center;
+  padding: var(--space-md) 0;
+  border-top: 1px solid rgba(201,185,154,0.1);
+  margin-top: var(--space-md);
+}
+
+.admin-actions__count {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: rgba(245,244,240,0.3);
+  margin-left: auto;
+}
+
+/* Toast de notificación */
+.toast {
+  position: fixed;
+  bottom: 32px;
+  right: var(--section-pad);
+  background: var(--color-carbon);
+  border: 1px solid rgba(201,185,154,0.3);
+  padding: 14px 24px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+  z-index: 9999;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform var(--duration-mid) ease, opacity var(--duration-mid) ease;
+  pointer-events: none;
+}
+.toast.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+
+/* ============================================================
+   17. RESPONSIVE
+   ============================================================ */
+
+/* — Tablet y mobile (máx 900px) — */
+@media (max-width: 900px) {
+
+  /* ── HERO MOBILE: imagen de fondo visible debajo del texto ── */
+  .hero {
+    grid-template-columns: 1fr;
+    position: relative; /* necesario para el posicionamiento absoluto del panel derecho */
+  }
+
+  /* La imagen pasa a ser fondo absoluto que cubre todo el hero */
+  .hero__right {
+    display: block;           /* Volver a mostrar (antes era display:none) */
+    position: absolute;
+    inset: 0;                 /* Ocupa todo el hero */
+    z-index: 0;               /* Detrás del texto */
+  }
+
+  /* Eliminar el pseudo-elemento ::after (línea dorada vertical) en mobile
+     para que no tape el contenido */
+  .hero__right::after {
+    display: none;
+  }
+
+  /* El degradado lateral pasa a ser vertical: negro arriba para leer el texto,
+     transparente abajo para que la foto se vea */
+  .hero__right::before {
+    background: linear-gradient(
+      to bottom,
+      rgba(10,10,10,0.92) 0%,    /* Negro intenso arriba donde está el texto */
+      rgba(10,10,10,0.65) 55%,   /* Semitransparente en el centro */
+      rgba(10,10,10,0.30) 100%   /* Más claro abajo para que se vea la foto */
+    );
+  }
+
+  /* La imagen cubre todo sin animación Ken Burns en mobile (performance) */
+  .hero__img {
+    animation: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%; /* Encuadre centrado en la parte superior de la figura */
+  }
+
+  /* El texto va encima de la imagen */
+  .hero__left {
+    position: relative;
+    z-index: 2;                  /* Por encima de la imagen */
+    justify-content: flex-end;   /* Texto pegado abajo */
+    min-height: 100dvh;
+    padding-top: 100px;
+    padding-bottom: 60px;
+    /* Sombra de texto para garantizar legibilidad sobre la imagen */
+    text-shadow: 0 2px 20px rgba(10,10,10,0.6);
+  }
+
+  /* El badge también queda visible en mobile */
+  .hero__badge {
+    z-index: 2;
+  }
+
+  /* About en columna */
+  .about {
+    grid-template-columns: 1fr;
+  }
+  .about__img-accent { display: none; }
+  .about__tag { display: none; }
+  .about__visual::before { display: none; }
+
+  /* Servicios en 2 columnas */
+  .services__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Contacto en columna */
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* CTA full width */
+  .cta-band {
+    margin-left: 0; margin-right: 0;
+    flex-direction: column;
+    text-align: center;
+  }
+  .cta-band::before { display: none; }
+
+  /* Nav */
+  .nav__links { display: none; }
+  .nav__cta { display: none; }
+  .nav__hamburger { display: flex; }
+}
+
+/* — Mobile (máx 600px) — */
+@media (max-width: 600px) {
+  :root {
+    --space-xl: 80px;
+    --space-lg: 48px;
+  }
+
+  /* Hero mobile: imagen un poco más arriba para mostrar mejor la figura */
+  .hero__img {
+    object-position: center 15%;
+  }
+
+  /* En pantallas muy pequeñas el título puede ser demasiado grande:
+     reducir levemente para que quepa con la imagen de fondo */
+  .hero__title {
+    font-size: clamp(56px, 14vw, 80px);
+  }
+
+  .hero__title-serif {
+    font-size: clamp(24px, 7vw, 38px);
+  }
+
+  /* Servicios: 2 columnas en mobile (más visual que 1 sola) */
+  .services__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Galería: items más pequeños */
+  .gallery__item {
+    flex: 0 0 200px;
+    height: 280px;
+  }
+
+  /* Stats: uno debajo del otro */
+  .about__stats {
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+
+  /* Footer centrado */
+  .footer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* Admin preview en 2 columnas */
+  .preview-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* — Mobile muy pequeño (máx 400px, ej: iPhone SE) — */
+@media (max-width: 400px) {
+  /* Una sola columna en pantallas muy angostas */
+  .services__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* — Desktop grande (mín 1400px) — */
+@media (min-width: 1400px) {
+  .services__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .gallery__item {
+    flex: 0 0 380px;
+    height: 500px;
+  }
+}
+
+
+/* ============================================================
+   KEYFRAMES — Animaciones
+   ============================================================ */
+
+/* Entrada del hero */
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Ken Burns: zoom sutil en la imagen del hero */
+@keyframes kenBurns {
+  from { transform: scale(1); }
+  to   { transform: scale(1.06); }
+}
+
+/* Scroll del marquee: mueve al 50% de su ancho (segunda copia = loop) */
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Scroll de la galería de fotos */
+@keyframes galleryScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Pulso del indicador de scroll */
+@keyframes scrollPulse {
+  0%, 100% { opacity: 1; width: 40px; }
+  50%       { opacity: 0.4; width: 20px; }
+}
+
+/* Entrada suave del fade */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

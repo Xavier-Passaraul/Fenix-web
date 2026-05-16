@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+  <!-- ============================================================
+       FENIX SALÓN UNISEX — admin.html
+       Panel de administración de fotos de la galería
+       Acceso interno — no indexar en buscadores
+       ============================================================ -->
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ── SEO: este panel NO debe aparecer en buscadores ─────── -->
+  <title>Panel de Fotos — Fenix Salón Unisex</title>
+  <meta name="description" content="Panel de administración de fotos para Fenix Salón Unisex. Solo uso interno." />
+  <!-- Noindex: impide que Google indexe esta página -->
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0a0a0a" />
+
+  <!-- ── Accesibilidad ────────────────────────────────────── -->
+  <meta name="color-scheme" content="dark" />
+
+  <!-- ── Open Graph mínimo (por si alguien comparte el link) ── -->
+  <meta property="og:title"       content="Panel de Fotos — Fenix" />
+  <meta property="og:description" content="Panel interno de administración de fotos." />
+  <meta property="og:type"        content="website" />
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;1,300&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet" />
+
+  <!-- Estilos compartidos (mismos tokens de diseño que index.html) -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230a0a0a'/><text y='.9em' font-size='90' x='5'>✂</text></svg>" />
+
+  <!-- Estilos adicionales específicos del admin (complementan style.css) -->
+  <style>
+    /* ── Variables adicionales admin ── */
+    :root {
+      --admin-sidebar: 260px; /* Ancho del sidebar en desktop grande */
+    }
+
+    /* ── Layout del admin en pantallas grandes ──────────────── */
+    /* En pantallas anchas, el sidebar queda fijo a la izquierda */
+    @media (min-width: 1100px) {
+      .admin-layout {
+        display: grid;
+        grid-template-columns: var(--admin-sidebar) 1fr;
+        min-height: 100vh;
+      }
+
+      /* Sidebar fijo */
+      .admin-sidebar {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow-y: auto;
+        background: var(--color-carbon);
+        border-right: 1px solid rgba(201,185,154,0.1);
+        padding: 100px 32px 32px;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-lg);
+      }
+
+      .admin-main {
+        overflow-x: hidden;
+      }
+    }
+
+    /* ── Sidebar oculto en tablet/mobile ── */
+    @media (max-width: 1099px) {
+      .admin-sidebar {
+        display: none; /* Se oculta; la nav de la cabecera es suficiente */
+      }
+    }
+
+    /* Navegación del sidebar */
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .sidebar-nav__item {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245,244,240,0.35);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: color 0.2s ease, background 0.2s ease;
+      border-left: 2px solid transparent;
+    }
+    .sidebar-nav__item:hover,
+    .sidebar-nav__item.is-active {
+      color: var(--color-accent);
+      background: rgba(201,185,154,0.05);
+      border-left-color: var(--color-accent);
+    }
+
+    .sidebar-nav__icon { font-size: 14px; }
+
+    /* Sidebar info de almacenamiento */
+    .storage-bar {
+      background: rgba(245,244,240,0.05);
+      height: 3px;
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .storage-bar__fill {
+      height: 100%;
+      background: var(--color-accent);
+      border-radius: 2px;
+      transition: width 0.4s ease;
+    }
+
+    /* ── Encabezado del panel ── */
+    .admin-topbar {
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,185,154,0.12);
+      padding: 16px var(--section-pad);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      flex-wrap: wrap;
+    }
+
+    .admin-topbar__logo {
+      font-family: var(--font-display);
+      font-size: 20px;
+      letter-spacing: 0.15em;
+      color: var(--color-white);
+    }
+
+    .admin-topbar__badge {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      border: 1px solid rgba(201,185,154,0.3);
+      padding: 4px 10px;
+    }
+
+    .admin-topbar__actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-left: auto;
+    }
+
+    /* ── Sección de instrucciones ── */
+    .admin-instructions {
+      background: var(--color-carbon);
+      border: 1px solid rgba(201,185,154,0.12);
+      padding: var(--space-md) clamp(20px, 3vw, var(--space-md));
+      margin-bottom: var(--space-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Línea dorada en la esquina superior izquierda */
+    .admin-instructions::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 60px; height: 2px;
+      background: var(--color-accent);
+    }
+
+    .admin-instructions h3 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      letter-spacing: 0.1em;
+      color: var(--color-white);
+      margin-bottom: 12px;
+    }
+
+    .admin-instructions ul {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .admin-instructions li {
+      font-size: 13px;
+      color: rgba(245,244,240,0.45);
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .admin-instructions li::before {
+      content: '◆';
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-size: 7px;
+      top: 4px;
+    }
+
+    .admin-instructions li strong {
+      color: var(--color-accent);
+      font-weight: 400;
+    }
+
+    /* ── Filtros de la galería ── */
+    .gallery-filters {
+      display: flex;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-md);
+    }
+
+    .filter-btn {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245,244,240,0.4);
+      border: 1px solid rgba(201,185,154,0.15);
+      padding: 8px 16px;
+      transition: all 0.2s ease;
+      cursor: none;
+    }
+    .filter-btn:hover,
+    .filter-btn.is-active {
+      color: var(--color-accent);
+      border-color: var(--color-accent);
+      background: rgba(201,185,154,0.06);
+    }
+
+    /* ── Progress de carga ── */
+    .upload-progress {
+      display: none;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: var(--space-sm) 0;
+      font-size: 12px;
+      color: var(--color-accent);
+      letter-spacing: 0.1em;
+    }
+    .upload-progress.is-loading { display: flex; }
+
+    .progress-spinner {
+      width: 16px; height: 16px;
+      border: 1.5px solid rgba(201,185,154,0.2);
+      border-top-color: var(--color-accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ── Vista previa del landing ── */
+    .landing-preview-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(245,244,240,0.3);
+      border-bottom: 1px solid rgba(245,244,240,0.1);
+      padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .landing-preview-link:hover {
+      color: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+  </style>
+</head>
+
+<body class="admin-body">
+
+  <!-- Skip link accesibilidad -->
+  <a class="skip-link" href="#admin-main-content">Saltar al contenido del panel</a>
+
+  <!-- Cursor personalizado -->
+  <div class="cursor"          aria-hidden="true"></div>
+  <div class="cursor-follower" aria-hidden="true"></div>
+
+  <!-- ─────────────────────────────────────────────────────────
+       TOPBAR FIJA
+  ───────────────────────────────────────────────────────────── -->
+  <header class="admin-topbar" role="banner">
+    <div style="display:flex; align-items:center; gap:16px">
+      <a href="index.html" class="admin-topbar__logo" aria-label="Volver a la página principal de Fenix">FENIX</a>
+      <span class="admin-topbar__badge" aria-label="Panel de administración de fotos">PANEL DE FOTOS</span>
+    </div>
+
+    <div class="admin-topbar__actions">
+      <!-- Link para ver el landing -->
+      <a href="index.html"
+         class="landing-preview-link"
+         aria-label="Ver la página principal de Fenix">
+        ← Ver la web
+      </a>
+    </div>
+  </header>
+
+  <!-- ─────────────────────────────────────────────────────────
+       LAYOUT: sidebar (desktop) + contenido principal
+  ───────────────────────────────────────────────────────────── -->
+  <div class="admin-layout">
+
+    <!-- ── SIDEBAR (visible solo en +1100px) ── -->
+    <aside class="admin-sidebar" aria-label="Navegación del panel">
+
+      <div>
+        <p class="t-label" style="margin-bottom:16px">Panel</p>
+        <nav class="sidebar-nav" aria-label="Secciones del panel">
+          <a class="sidebar-nav__item is-active" href="#upload">
+            <span class="sidebar-nav__icon" aria-hidden="true">↑</span>
+            Cargar fotos
+          </a>
+          <a class="sidebar-nav__item" href="#galeria-admin">
+            <span class="sidebar-nav__icon" aria-hidden="true">▦</span>
+            Galería
+          </a>
+        </nav>
+      </div>
+
+      <!-- Info de almacenamiento -->
+      <div>
+        <p class="t-label" style="margin-bottom:12px">Almacenamiento</p>
+        <div style="display:flex; justify-content:space-between; margin-bottom:6px">
+          <span class="t-body" style="font-size:11px" id="storage-used">0 KB usados</span>
+          <span class="t-body" style="font-size:11px; color:var(--color-gray-light)">~5 MB máx.</span>
+        </div>
+        <div class="storage-bar">
+          <div class="storage-bar__fill" id="storage-bar-fill" style="width:0%"></div>
+        </div>
+        <p class="t-body" style="font-size:11px; margin-top:8px">
+          Las fotos se guardan en el navegador (localStorage). Se cargan automáticamente en la galería de la web.
+        </p>
+      </div>
+
+      <!-- Link al landing -->
+      <a href="index.html" class="btn btn--outline" style="margin-top:auto; text-align:center">
+        ← Ir a la web
+      </a>
+
+    </aside>
+
+    <!-- ── CONTENIDO PRINCIPAL ── -->
+    <main class="admin-main" id="admin-main-content" tabindex="-1">
+
+      <!-- Padding wrapper -->
+      <div style="padding: var(--space-lg) var(--section-pad) var(--space-xxl)">
+
+        <!-- ─────────────── HEADER ─────────────── -->
+        <header class="admin-header">
+          <p class="t-label">Gestión de imágenes</p>
+          <h1 class="t-section" style="margin-top:8px">
+            Galería <em class="t-italic">del salón.</em>
+          </h1>
+          <div class="gold-divider" style="margin-top:20px" aria-hidden="true"></div>
+        </header>
+
+        <!-- ─────────────── INSTRUCCIONES ─────────────── -->
+        <div class="admin-instructions reveal" role="note" aria-label="Instrucciones de uso">
+          <h3>Cómo funciona</h3>
+          <ul role="list">
+            <li>
+              <strong>Arrastrá</strong> fotos al área de carga, o hacé click para seleccionarlas.
+            </li>
+            <li>
+              Las imágenes se <strong>convierten en blanco y negro</strong> automáticamente para mantener la estética del sitio.
+            </li>
+            <li>
+              Se guardan en el <strong>navegador</strong> y aparecen instantáneamente en la galería de la web principal.
+            </li>
+            <li>
+              Podés cargar hasta <strong>30 fotos</strong>. Eliminá las que no quieras para hacer espacio.
+            </li>
+            <li>
+              <strong>Para que los clientes vean las fotos</strong>, ambos archivos (index.html y admin.html) deben estar en el mismo servidor.
+            </li>
+          </ul>
+        </div>
+
+        <!-- ─────────────── ZONA DE CARGA ─────────────── -->
+        <section class="upload-section" id="upload" aria-labelledby="upload-title">
+
+          <p class="t-label upload-section__title" id="upload-title">Cargar nuevas fotos</p>
+
+          <!-- Dropzone -->
+          <div class="dropzone reveal"
+               role="region"
+               aria-label="Zona de carga de fotos. Arrastrá y soltá imágenes aquí, o hacé click para seleccionar."
+               aria-describedby="dropzone-formats">
+
+            <!-- Input file oculto (el dropzone completo actúa como label) -->
+            <input type="file"
+                   class="dropzone__input"
+                   accept="image/*"
+                   multiple
+                   aria-label="Seleccionar archivos de imagen"
+                   id="file-input" />
+
+            <!-- Ícono decorativo -->
+            <div class="dropzone__icon" aria-hidden="true">⬆</div>
+
+            <!-- Texto principal -->
+            <p class="dropzone__text">
+              Arrastrá las fotos aquí<br/>
+              o <strong>hacé click para seleccionar</strong>
+            </p>
+
+            <!-- Formatos aceptados -->
+            <p class="dropzone__formats" id="dropzone-formats">
+              JPG · PNG · WEBP · HEIC · hasta 10 MB por foto
+            </p>
+          </div>
+
+          <!-- Indicador de progreso de carga -->
+          <div class="upload-progress" role="status" aria-live="polite" aria-label="Cargando fotos">
+            <div class="progress-spinner" aria-hidden="true"></div>
+            <span id="progress-text">Procesando fotos…</span>
+          </div>
+
+        </section>
+
+        <!-- ─────────────── GALERÍA ADMIN ─────────────── -->
+        <section id="galeria-admin" aria-labelledby="gallery-admin-title">
+
+          <!-- Cabecera con acciones -->
+          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:24px">
+            <p class="t-label" id="gallery-admin-title">Fotos cargadas</p>
+
+            <!-- Contador de fotos -->
+            <span class="admin-actions__count" aria-live="polite">0 / 30 fotos</span>
+          </div>
+
+          <!-- Barra de acciones -->
+          <div class="admin-actions" role="toolbar" aria-label="Acciones de la galería">
+            <button class="btn btn--outline admin-clear-btn"
+                    aria-label="Eliminar todas las fotos de la galería">
+              Eliminar todas
+            </button>
+            <button class="btn btn--primary admin-export-btn"
+                    aria-label="Ver instrucciones para integrar las fotos en la web">
+              Ver estado ↗
+            </button>
+          </div>
+
+          <!-- Grilla de previsualizaciones -->
+          <div class="preview-grid"
+               role="list"
+               aria-label="Fotos cargadas. Pasá el mouse sobre una foto para ver opciones."
+               aria-live="polite">
+          </div>
+
+          <!-- Mensaje cuando no hay fotos -->
+          <div class="preview-empty"
+               role="status"
+               aria-live="polite">
+            Todavía no hay fotos. Cargá las primeras usando el área de arriba.
+          </div>
+
+        </section>
+
+      </div><!-- /padding wrapper -->
+    </main>
+
+  </div><!-- /admin-layout -->
+
+  <!-- ─────────────────────────────────────────────────────────
+       FOOTER MINIMALISTA
+  ───────────────────────────────────────────────────────────── -->
+  <footer class="footer" role="contentinfo">
+    <p class="footer__copy">Fenix Salón Unisex · Panel interno · No compartir esta URL</p>
+    <a class="footer__logo" href="index.html" aria-label="Volver a la web principal">FENIX</a>
+    <a class="footer__admin-link" href="index.html" aria-label="Ver la galería en la web principal">Ver web →</a>
+  </footer>
+
+  <!-- Toast (generado por JS) -->
+
+  <!-- Script compartido -->
+  <script src="main.js" defer></script>
+
+  <!-- Script adicional del admin: actualiza la barra de almacenamiento -->
+  <script>
+    /* ── Actualizar indicador de almacenamiento ─────────────── */
+    /* Se ejecuta después del main.js (defer garantiza el orden) */
+    document.addEventListener('DOMContentLoaded', () => {
+
+      /* Calcular el tamaño aproximado del localStorage en KB */
+      function updateStorageIndicator() {
+        try {
+          const data = localStorage.getItem('fenix_photos') || '';
+          /* Cada char en localStorage son ~2 bytes */
+          const sizeKB = Math.round((data.length * 2) / 1024);
+          const maxKB  = 5120; /* 5 MB en KB */
+          const pct    = Math.min((sizeKB / maxKB) * 100, 100);
+
+          const usedEl = document.getElementById('storage-used');
+          const barEl  = document.getElementById('storage-bar-fill');
+
+          if (usedEl) usedEl.textContent = `${sizeKB} KB usados`;
+          if (barEl)  barEl.style.width  = pct + '%';
+
+          /* Cambiar color si está casi lleno */
+          if (barEl && pct > 80) {
+            barEl.style.background = 'rgba(255,100,100,0.8)';
+          }
+        } catch (e) {
+          console.warn('No se pudo calcular el almacenamiento:', e);
+        }
+      }
+
+      /* Actualizar al cargar y cada vez que el storage cambie */
+      updateStorageIndicator();
+      window.addEventListener('storage', updateStorageIndicator);
+
+      /* Observar cambios en el preview-grid para actualizar el contador */
+      const observer = new MutationObserver(updateStorageIndicator);
+      const grid = document.querySelector('.preview-grid');
+      if (grid) {
+        observer.observe(grid, { childList: true });
+      }
+    });
+  </script>
+
+</body>
+</html>
