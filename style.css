@@ -921,7 +921,7 @@ button {
 
 /* Número de servicio */
 .service-card__num {
-  font-size: 10px;
+  font-size: 15px;
   letter-spacing: 0.3em;
   color: var(--color-accent);
   margin-bottom: var(--space-md);
@@ -946,7 +946,7 @@ button {
 
 /* Texto descriptivo */
 .service-card__desc {
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.7;
   color: rgba(10,10,10,0.5); /* Gris oscuro sobre blanco */
 }
