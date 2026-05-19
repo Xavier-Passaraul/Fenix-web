@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"/>
+  <title>Turnos | Fénix Salón Unisex</title>
+  <meta
+    name="description"
+    content="Reservá tu turno en Fénix Salón Unisex. Experiencia premium en peluquería, barbería y estética."/>
+  <meta name="keywords" content="peluquería, barbería, turnos online, villa maría, estética, salón unisex"/>
+  <meta name="author" content="Fénix Salón Unisex"/>
+  <!-- Open Graph -->
+  <meta property="og:title" content="Turnos | Fénix Salón Unisex"/>
+  <meta property="og:description" content="Reservá tu experiencia premium en Fénix."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="img/cover.jpg"/>
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@1,500&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --white: #f5f4f0;
+      --gold: #c9b99a;
+      --gray: #888;
+      --card: #141414;
+
+      --radius: 18px;
+      --transition: 0.35s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    section {
+      padding: 100px 8%;
+      position: relative;
+    }
+
+    .gold-line {
+      position: absolute;
+      width: 180px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.4;
+    }
+
+    .top-line {
+      top: 80px;
+      left: 0;
+    }
+
+    .bottom-line {
+      bottom: 60px;
+      right: 0;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 60px;
+      position: relative;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(201,185,154,.1), transparent 30%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 600px;
+      z-index: 2;
+    }
+
+    .subtitle {
+      font-family: "Cormorant Garamond", serif;
+      color: var(--gold);
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(4rem, 10vw, 8rem);
+      line-height: .9;
+      letter-spacing: 3px;
+      margin-bottom: 25px;
+    }
+
+    .hero p {
+      color: #bdbdbd;
+      line-height: 1.8;
+      margin-bottom: 40px;
+      max-width: 520px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 34px;
+      border: 1px solid var(--gold);
+      border-radius: 100px;
+      color: var(--white);
+      transition: var(--transition);
+      font-weight: 500;
+      cursor: pointer;
+      background: transparent;
+    }
+
+    .btn:hover {
+      background: var(--gold);
+      color: var(--black);
+      transform: translateY(-3px);
+    }
+
+    .hero-image {
+      flex: 1;
+      position: relative;
+    }
+
+    .hero-image img {
+      border-radius: 24px;
+      filter: grayscale(100%);
+      object-fit: cover;
+      height: 700px;
+      width: 100%;
+    }
+
+    .section-title {
+      margin-bottom: 60px;
+    }
+
+    .section-title span {
+      color: var(--gold);
+      font-size: .9rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .section-title h2 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      margin-top: 10px;
+      letter-spacing: 2px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--card);
+      border: 1px solid rgba(201,185,154,.12);
+      border-radius: var(--radius);
+      padding: 35px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      background: var(--gold);
+      left: -100%;
+      top: 0;
+      transition: .6s ease;
+    }
+
+    .service-card:hover::before {
+      left: 0;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--gold);
+    }
+
+    .service-card h3 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 2rem;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+    }
+
+    .service-card p {
+      color: #bdbdbd;
+      line-height: 1.7;
+      margin-bottom: 25px;
+    }
+
+    .service-info {
+      display: flex;
+      justify-content: space-between;
+      color: var(--gold);
+      font-size: .9rem;
+    }
+
+    .professionals {
+      background: #0f0f0f;
+    }
+
+    .professionals-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .pro-card {
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: #111;
+      border: 1px solid rgba(255,255,255,.06);
+    }
+
+    .pro-card img {
+      height: 340px;
+      width: 100%;
+      object-fit: cover;
+      filter: grayscale(100%);
+    }
+
+    .pro-content {
+      padding: 25px;
+    }
+
+    .pro-content h3 {
+      font-family: "Bebas Neue", sans-serif;
+      letter-spacing: 1px;
+      font-size: 2rem;
+    }
+
+    .pro-content span {
+      color: var(--gold);
+      font-size: .95rem;
+    }
+
+    .booking-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    .booking-box {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 35px;
+      border: 1px solid rgba(201,185,154,.15);
+    }
+
+    .booking-box h3 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .calendar button {
+      padding: 16px;
+      background: #1b1b1b;
+      border: 1px solid transparent;
+      color: var(--white);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .calendar button:hover,
+    .calendar button.active {
+      border-color: var(--gold);
+      background: rgba(201,185,154,.08);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      background: #151515;
+      border: 1px solid rgba(255,255,255,.08);
+      padding: 18px;
+      border-radius: 12px;
+      color: var(--white);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    input:focus,
+    select:focus {
+      border-color: var(--gold);
+    }
+
+    .confirmation {
+      text-align: center;
+      padding: 120px 8%;
+      background: linear-gradient(to top, #0a0a0a, #101010);
+    }
+
+    .confirmation h2 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      margin-bottom: 20px;
+    }
+
+    .confirmation p {
+      color: #bdbdbd;
+      margin-bottom: 35px;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding: 40px 8%;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      color: #bdbdbd;
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        flex-direction: column;
+        padding-top: 120px;
+      }
+
+      .hero-image img {
+        height: 500px;
+      }
+
+      .booking-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      section {
+        padding: 80px 6%;
+      }
+
+      .calendar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      h1 {
+        font-size: 4.5rem;
+      }
+
+      .section-title h2 {
+        font-size: 3rem;
+      }
+
+      .hero-image img {
+        height: 400px;
+      }
+    }
+  </style>
+  <link rel="icon" type="image/jpeg" href="img/fenix.jpg" />
+</head>
+
+<body>
+  <!-- HERO -->
+  <section class="hero">
+
+    <div class="gold-line top-line"></div>
+
+    <div class="hero-content">
+      <div class="subtitle">
+        experiencia premium
+      </div>
+
+      <h1>RESERVÁ<br/>TU EXPERIENCIA</h1>
+      <p>
+        Un sistema de reservas diseñado para una experiencia moderna,
+        rápida y elegante. Elegí tu servicio, profesional y horario
+        en segundos.
+      </p>
+
+      <a href="#reservas" class="btn">Reservar Turno</a>
+    </div>
+
+    <div class="hero-image">
+      <img src="img/foto3.jpg" alt="Barbería premium" loading="lazy"/>
+    </div>
+
+  </section>
+
+  <!-- SERVICIOS -->
+  <section>
+
+    <div class="section-title">
+      <span>Servicios</span>
+      <h2>Elegí Tu Estilo</h2>
+    </div>
+
+    <div class="services-grid">
+
+      <div class="service-card">
+        <h3>Corte Masculino</h3>
+        <p>
+          Corte premium con lavado y terminación profesional.
+        </p>
+
+        <div class="service-info">
+          <span>$12.000</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <h3>Corte Femenino</h3>
+        <p>
+          Técnica personalizada y acabado profesional.
+        </p>
+
+        <div class="service-info">
+          <span>$18.000</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <h3>Barbería Premium</h3>
+        <p>
+          Perfilado, paños calientes y experiencia completa.
+        </p>
+
+        <div class="service-info">
+          <span>$15.000</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <h3>Colorimetría</h3>
+        <p>
+          Balayage, tinturas y técnicas avanzadas.
+        </p>
+
+        <div class="service-info">
+          <span>$35.000</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <h3>Tratamientos</h3>
+        <p>
+          Nutrición, botox y recuperación capilar premium.
+        </p>
+
+        <div class="service-info">
+          <span>$24.000</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <h3>Estética Facial</h3>
+        <p>
+          Limpieza facial y máscaras premium revitalizantes.
+        </p>
+
+        <div class="service-info">
+          <span>$10.000</span>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- RESERVAS -->
+  <section id="reservas">
+
+    <div class="section-title">
+      <span>Turnos</span>
+      <h2>Reservá Online</h2>
+    </div>
+
+    <div class="booking-container">
+
+      <div class="booking-box">
+
+        <h3>Elegí un horario</h3>
+
+        <div class="calendar">
+          <button>09:00</button>
+          <button>10:00</button>
+          <button>11:00</button>
+          <button>12:00</button>
+          <button>16:00</button>
+          <button>17:00</button>
+        </div>
+
+      </div>
+
+      <div class="booking-box">
+
+        <h3>Datos del cliente</h3>
+
+        <form id="bookingForm">
+
+          <input type="text" placeholder="Nombre completo" required aria-label="Nombre"/>
+          <input type="tel" placeholder="Teléfono" required aria-label="Teléfono"/>
+          <select required aria-label="Servicio">
+            <option value="">Seleccionar servicio</option>
+            <option>Corte Masculino</option>
+            <option>Barbería Premium</option>
+            <option>Colorimetría</option>
+          </select>
+
+          <button class="btn" type="submit">Confirmar Reserva</button>
+        </form>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- CONFIRMACION -->
+  <section class="confirmation">
+
+    <h2>TURNO CONFIRMADO</h2>
+
+    <p>
+      Tu experiencia en Fénix ya está reservada.
+    </p>
+
+    <div
+      style="
+        display:flex;
+        gap:20px;
+        justify-content:center;
+        flex-wrap:wrap;
+      "
+    >
+      <a href="index" class="btn">
+        Volver al inicio
+      </a>
+
+      <a href="https://instagram.com" target="_blank" class="btn">Instagram</a>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div>
+      FÉNIX SALÓN UNISEX © 2026
+    </div>
+
+    <div>
+      Villa María, Córdoba
+    </div>
+
+  </footer>
+
+<script>
+  const buttons = document.querySelectorAll(".calendar button");
+  let horarioSeleccionado = "";
+
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+
+      buttons.forEach(btn => btn.classList.remove("active"));
+
+      button.classList.add("active");
+
+      horarioSeleccionado = button.textContent;
+    });
+  });
+
+  const form = document.getElementById("bookingForm");
+
+  form.addEventListener("submit", (e) => {
+
+    e.preventDefault();
+
+    const nombre = document.querySelector('input[type="text"]').value;
+    const telefono = document.querySelector('input[type="tel"]').value;
+    const servicio = document.querySelector("select").value;
+
+    if (!horarioSeleccionado) {
+      alert("Seleccioná un horario.");
+      return;
+    }
+
+    const mensaje = `
+✂️ NUEVO TURNO — FÉNIX
+
+👤 Nombre: ${nombre}
+📱 Teléfono: ${telefono}
+💈 Servicio: ${servicio}
+🕒 Horario: ${horarioSeleccionado}
+    `;
+
+    const numero = "5493534127381";
+
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+
+    window.open(url, "_blank");
+
+  });
+</script>
+
+</body>
+</html>

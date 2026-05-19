@@ -309,8 +309,8 @@ button {
 /* Nav con fondo al scrollear */
 .nav.is-scrolled {
   background: rgba(10,10,10,0.95);
-  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(201,185,154,0.12);
   padding-top: 16px;
   padding-bottom: 16px;
