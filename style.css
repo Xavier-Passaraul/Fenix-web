@@ -568,8 +568,8 @@ button {
 .hero__left {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 120px var(--section-pad) 80px;
+  justify-content: start; /* 👈 Cambiado de flex-end a center para subir el bloque */
+  padding: 160px var(--section-pad) 80px; /* 👈 Aumentamos un poco el padding superior para cuidar la distancia con el menú de navegación */
   position: relative;
   z-index: 2;
 }
@@ -648,6 +648,7 @@ button {
   height: 100%;
   object-fit: cover;
   object-position: center top;
+  transform-origin: center top;
   filter: grayscale(100%) contrast(1.05);
   /* Ken Burns sutil: pequeño zoom continuo */
   animation: kenBurns 18s ease-in-out infinite alternate;

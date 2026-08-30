@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
 <head>
-  <!-- ============================================================
-       FENIX SALÓN UNISEX — index.html
-       Landing page principal
-       ============================================================ -->
-
-  <!-- Codificación y viewport responsivo -->
+  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -130,7 +125,7 @@
     <nav class="nav" aria-label="Navegación principal">
 
       <!-- Logo -->
-      <!-- <a class="nav__logo" href="/" aria-label="Fenix Salón Unisex — Inicio">FENIX</a> -->
+       <a class="nav__logo" href="/" aria-label="Fenix Salón Unisex — Inicio">Status Quo</a> 
 
       <!-- Links desktop -->
       <ul class="nav__links" role="list">
@@ -211,7 +206,7 @@
         <!-- Descripción breve -->
         <p class="hero__desc t-body">
           Peluquería, barbería y estética de élite. Cada servicio,
-          una experiencia diseñada para revelar tu mejor versión.
+          una experiencia que revela tu mejor versión.
         </p>
 
         <!-- Línea dorada divisoria -->
@@ -264,125 +259,7 @@
 
     <!-- ══ MARQUEE — ticker de servicios, animado en cualquier pantalla ══ -->
     <!-- Todo el CSS está inline para que no dependa de style.css ni de clases externas -->
-    <section aria-label="Nuestros servicios" style="
-      background: #f5f4f0;
-      border-top: 1px solid #c9b99a;
-      border-bottom: 1px solid #c9b99a;
-      overflow: hidden;               /* corta el texto que sale por los bordes */
-      padding: 16px 0;
-      width: 100%;
-      box-sizing: border-box;
-    ">
-      <!-- Estilos de la animación: definidos aquí para garantizar que se carguen
-           antes del elemento, sin depender de ningún archivo externo -->
-      <style>
-        /* Keyframe: mueve el track exactamente su propio ancho hacia la izquierda.
-           Como el contenido está duplicado, cuando llega al 50% del recorrido
-           el loop es invisible — parece infinito. */
-        @keyframes fenix-ticker {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-
-        .fenix-ticker-track {
-          /* Fila horizontal que NO hace wrap */
-          display: flex;
-          flex-direction: row;
-          flex-wrap: nowrap;
-          align-items: center;
-
-          /* El ancho lo determina el contenido, no el contenedor */
-          width: max-content;
-
-          /* Animación: 20s, lineal, infinita */
-          animation: fenix-ticker 20s linear infinite;
-
-          /* Aceleración por GPU — clave para mobile */
-          will-change: transform;
-          -webkit-transform: translateZ(0);
-          transform: translateZ(0);
-        }
-
-        /* Pausa al pasar el mouse (solo desktop) */
-        .fenix-ticker-track:hover {
-          animation-play-state: paused;
-        }
-
-        .fenix-ticker-item {
-          font-family: 'Bebas Neue', 'Impact', sans-serif;
-          font-size: 14px;
-          letter-spacing: 0.18em;
-          color: #0a0a0a;
-          white-space: nowrap;
-          padding: 0 24px;
-          flex-shrink: 0;
-        }
-
-        .fenix-ticker-dot {
-          color: #c9b99a;
-          font-size: 8px;
-          flex-shrink: 0;
-          line-height: 1;
-        }
-      </style>
-
-      <!-- aria-hidden: el contenido es decorativo/redundante para lectores de pantalla -->
-      <div class="fenix-ticker-track" aria-hidden="true">
-        <!-- Primera copia del contenido -->
-        <span class="fenix-ticker-item">CORTE MASCULINO</span>
-        <span class="fenix-ticker-dot">◆</span>
-        <span class="fenix-ticker-item">CORTE FEMENINO</span>
-        <span class="fenix-ticker-dot">◆</span>
-        <span class="fenix-ticker-item">BARBERÍA</span>
-        <span class="fenix-ticker-dot">◆</span>
-        <span class="fenix-ticker-item">ALISADOS</span>
-        <span class="fenix-ticker-dot">◆</span>
-        <span class="fenix-ticker-item">TINTURA</span>
-        <span class="fenix-ticker-dot">◆</span>
-        <span class="fenix-ticker-item">BALAYAGE</span>
-        <span class="fenix-ticker-dot">◆</span>
-        <span class="fenix-ticker-item">NUTRICIÓN CAPILAR</span>
-        <span class="fenix-ticker-dot">◆</span>
-        <span class="fenix-ticker-item">ESTÉTICA FACIAL</span>
-        <span class="fenix-ticker-dot">◆</span>
-        <span class="fenix-ticker-item">BOTOX CAPILAR</span>
-        <span class="fenix-ticker-dot">◆</span>
-        <span class="fenix-ticker-item">CURSOS</span>
-        <span class="fenix-ticker-dot">◆</span>
-        <span class="fenix-ticker-item">LAVADO & BRUSHING</span>
-        <span class="fenix-ticker-dot">◆</span>
-        <span class="fenix-ticker-item">DEPILACIÓN</span>
-        <span class="fenix-ticker-dot">◆</span>
-        <!-- Segunda copia EXACTA — necesaria para que el loop sea invisible -->
-        <span class="fenix-ticker-item">CORTE MASCULINO</span>
-        <span class="fenix-ticker-dot">◆</span>
-        <span class="fenix-ticker-item">CORTE FEMENINO</span>
-        <span class="fenix-ticker-dot">◆</span>
-        <span class="fenix-ticker-item">BARBERÍA</span>
-        <span class="fenix-ticker-dot">◆</span>
-        <span class="fenix-ticker-item">ALISADOS</span>
-        <span class="fenix-ticker-dot">◆</span>
-        <span class="fenix-ticker-item">TINTURA</span>
-        <span class="fenix-ticker-dot">◆</span>
-        <span class="fenix-ticker-item">BALAYAGE</span>
-        <span class="fenix-ticker-dot">◆</span>
-        <span class="fenix-ticker-item">NUTRICIÓN CAPILAR</span>
-        <span class="fenix-ticker-dot">◆</span>
-        <span class="fenix-ticker-item">ESTÉTICA FACIAL</span>
-        <span class="fenix-ticker-dot">◆</span>
-        <span class="fenix-ticker-item">BOTOX CAPILAR</span>
-        <span class="fenix-ticker-dot">◆</span>
-        <span class="fenix-ticker-item">CURSOS</span>
-        <span class="fenix-ticker-dot">◆</span>
-        <span class="fenix-ticker-item">LAVADO & BRUSHING</span>
-        <span class="fenix-ticker-dot">◆</span>
-        <span class="fenix-ticker-item">DEPILACIÓN</span>
-        <span class="fenix-ticker-dot">◆</span>
-      </div>
-    </section>
-
-    <div class="gold-divider" role="separator" aria-hidden="true"></div>
-
+    
     <!-- ══════════════════════════════════════════
          NOSOTROS
     ══════════════════════════════════════════ -->
@@ -401,7 +278,7 @@
                alt="Servicio de peluquería en Fenix"
                width="400" height="400"
                loading="lazy" />
-          <div class="about__tag" aria-hidden="true">FENIX · VILLA MARÍA</div>
+          <div class="about__tag" aria-hidden="true">Status Quo · VILLA MARÍA</div>
         </div>
 
         <!-- Contenido textual -->
