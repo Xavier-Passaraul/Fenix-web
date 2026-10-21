@@ -1,5 +1,5 @@
 /* ============================================================
-   FENIX SALÓN UNISEX — style.css
+   ELEGANCIA ESTÉTICA & BARBERÍA — style.css
    Hoja de estilos principal compartida entre index.html y admin.html
    
    Estructura:
@@ -319,11 +319,12 @@ button {
 /* Logo */
 .nav__logo {
   font-family: var(--font-display);
-  font-size: 24px;
-  letter-spacing: 0.15em;
+  font-size: clamp(12px, 1.15vw, 16px);
+  letter-spacing: 0.05em;
   color: var(--color-white);
   transition: color var(--duration-fast) ease;
   flex-shrink: 0;
+  white-space: nowrap;
 }
 .nav__logo:hover { color: var(--color-accent); }
 
@@ -1092,7 +1093,7 @@ button {
 
 /* Texto de fondo decorativo */
 .cta-band::before {
-  content: 'FENIX';
+  content: 'ELEGANCIA';
   position: absolute;
   right: -20px; top: 50%;
   transform: translateY(-50%);
@@ -1227,8 +1228,8 @@ button {
 
 .footer__logo {
   font-family: var(--font-display);
-  font-size: 20px;
-  letter-spacing: 0.2em;
+  font-size: 16px;
+  letter-spacing: 0.12em;
   color: rgba(245,244,240,0.12);
 }
 
