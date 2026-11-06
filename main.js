@@ -1,5 +1,5 @@
 /* ============================================================
-   ELEGANCIA ESTÉTICA & BARBERÍA — main.js
+   STATUS QUO — main.js
    JavaScript principal compartido entre index.html y admin.html
 
    Módulos:
@@ -494,7 +494,7 @@ document.addEventListener('DOMContentLoaded', () => {
         item.innerHTML = `
           <img
             src="${photo.dataUrl}"
-            alt="Foto de Elegancia Estética & Barbería: ${escapeHtml(photo.name)}"
+            alt="Foto de Status Quo: ${escapeHtml(photo.name)}"
             loading="lazy"
           />
           <span class="gallery__caption" aria-hidden="true">${escapeHtml(photo.name)}</span>
@@ -562,7 +562,7 @@ document.addEventListener('DOMContentLoaded', () => {
           item.innerHTML = `
             <img
               src="${photo.dataUrl}"
-              alt="Foto de Elegancia Estética & Barbería: ${escapeHtml(photo.name)}"
+              alt="Foto de Status Quo: ${escapeHtml(photo.name)}"
               loading="lazy"
             />
             <span class="gallery__caption" aria-hidden="true">${escapeHtml(photo.name)}</span>
