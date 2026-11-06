@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <meta name="robots" content="noindex, nofollow">
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"/>
@@ -10,7 +11,7 @@
     name="description"
     content="Reservá tu turno en Elegancia Estética &amp; Barbería. Experiencia premium en peluquería, barbería y estética."/>
   <meta name="keywords" content="peluquería, barbería, turnos online, Córdoba, estética, salón unisex"/>
-  <meta name="author" content="Elegancia Estética &amp; Barbería"/>
+  <meta name="author" content="Desarrollo Real">
   
   <meta property="og:title" content="Turnos | Elegancia Estética &amp; Barbería"/>
   <meta property="og:description" content="Reservá tu experiencia premium en Elegancia Estética &amp; Barbería."/>
@@ -387,6 +388,14 @@
         padding: 80px 6%;
       }
 
+      .hero-content {
+        width: 100%;
+      }
+
+      .hero-content h1 {
+        font-size: 11.5vw;
+      }
+
       .calendar {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -582,11 +591,11 @@
         flex-wrap:wrap;
       "
     >
-      <a href="index" class="btn">
+      <a href="index.html" class="btn">
         Volver al inicio
       </a>
 
-      <a href="https://instagram.com" target="_blank" class="btn">Instagram</a>
+      <a href="https://wa.me/message/TJECHDF7XOJWA1" target="_blank" rel="noopener" class="btn">WhatsApp</a>
     </div>
 
   </section>
@@ -595,16 +604,32 @@
   <footer>
 
     <div>
-      ELEGANCIA ESTÉTICA & BARBERÍA © 2026
+      ELEGANCIA ESTÉTICA & BARBERÍA © 2026 · VILLA MARÍA
     </div>
 
     <div>
-      José Rucci 1567, Córdoba
+      Villa María, Córdoba<br/><span style="font-size:11px;opacity:.7">Sitio de ejemplo · Diseño y desarrollo: <a href="https://desarrollo-real.vercel.app" target="_blank" rel="noopener">Desarrollo Real</a></span>
     </div>
 
   </footer>
 
 <script>
+    function copiarYAbrirWhatsApp(texto) {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = texto; ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        document.execCommand('copy'); document.body.removeChild(ta);
+      } catch (e) {}
+      try { navigator.clipboard && navigator.clipboard.writeText(texto); } catch (e) {}
+      window.open('https://wa.me/message/TJECHDF7XOJWA1', '_blank', 'noopener');
+      const aviso = document.createElement('div');
+      aviso.textContent = 'Copiamos tu pedido. Pegalo en el chat de WhatsApp.';
+      aviso.style.cssText = 'position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#f5f4f0;color:#0a0a0a;padding:14px 22px;font:500 14px DM Sans,sans-serif;z-index:99999;max-width:90vw;text-align:center';
+      document.body.appendChild(aviso);
+      setTimeout(() => aviso.remove(), 7000);
+    }
   const buttons = document.querySelectorAll(".calendar button");
   let horarioSeleccionado = "";
 
@@ -643,11 +668,7 @@
 🕒 Horario: ${horarioSeleccionado}
     `;
 
-    const numero = "5493534127381";
-
-    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
-
-    window.open(url, "_blank");
+    copiarYAbrirWhatsApp(mensaje);
 
   });
 </script>
